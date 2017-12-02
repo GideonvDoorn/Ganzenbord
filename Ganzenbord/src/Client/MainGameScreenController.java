@@ -1,10 +1,9 @@
-package UI;
+package Client;
 
+import Shared.Game;
+import Shared.Player;
 import javafx.fxml.FXML;
-import Game.*;
 import javafx.scene.control.Button;
-
-import javax.xml.bind.annotation.XmlElement;
 
 public class MainGameScreenController {
 

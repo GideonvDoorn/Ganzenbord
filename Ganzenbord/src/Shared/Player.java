@@ -1,4 +1,6 @@
-package Game;
+package Shared;
+
+import Server.Tile;
 
 public class Player {
 

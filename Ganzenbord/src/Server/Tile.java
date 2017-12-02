@@ -1,4 +1,4 @@
-package Game;
+package Server;
 
 public class Tile {
 
@@ -13,7 +13,6 @@ public class Tile {
     public TileType getType() {
         return type;
     }
-
 
     public Tile(int index, TileType type){
         this.type = type;

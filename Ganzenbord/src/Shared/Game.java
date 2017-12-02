@@ -1,4 +1,9 @@
-package Game;
+package Shared;
+
+import Server.Board;
+import Server.Tile;
+import Server.TileType;
+import Shared.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +61,7 @@ public class Game {
 
         Random rndm = new Random();
 
-        int newIndex = player.getCurrentTile().getTileIndex() + rndm.nextInt(7);
+        int newIndex = player.getCurrentTile().getTileIndex() + ( 1 + rndm.nextInt(6));
         if(newIndex >= gameBoard.getTileByType(TileType.End).getTileIndex()){
             //player has reached the end
 

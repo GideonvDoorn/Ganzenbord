@@ -1,4 +1,4 @@
-package Game;
+package Server;
 
 import java.util.List;
 
