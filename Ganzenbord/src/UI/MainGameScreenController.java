@@ -25,6 +25,8 @@ public class MainGameScreenController {
 
     @FXML
     public void RollDieBtnClick(){
+
+        //Simulate game flow
         activeGame.startMove(player);
         activeGame.startMove(player2);
 
