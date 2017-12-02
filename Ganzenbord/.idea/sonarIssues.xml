@@ -3,6 +3,16 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/Game/Board.java">
           <value>
             <set />
@@ -34,6 +44,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/UI/Main.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/UI/MainGameScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/UI/MainGameScreenController.java">
           <value>
             <set />
           </value>
