@@ -49,7 +49,7 @@ public class Game {
     }
 
     public void startMove(Player player) {
-
+        // starts moving player
         if(gameEnded){
             return;
         }
