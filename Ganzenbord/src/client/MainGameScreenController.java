@@ -29,6 +29,10 @@ public class MainGameScreenController {
         activeGame.startMove(player);
         activeGame.startMove(player2);
 
+        if(activeGame.getGameEnded()){
+            return;
+        }
+
         if(activeGame.allPlayersMoved()){
             activeGame.startTurn();
         }
