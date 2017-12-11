@@ -11,6 +11,8 @@ public class Player {
     private String name;
     private Tile currentTile;
 
+    private boolean hasMoved;
+
     public boolean hasMoved() {
         return hasMoved;
     }
@@ -19,7 +21,7 @@ public class Player {
         this.hasMoved = hasMoved;
     }
 
-    private boolean hasMoved;
+
 
     public Tile getCurrentTile() {
         return currentTile;
@@ -34,8 +36,9 @@ public class Player {
         this.name = name;
     }
 
-    public void MoveToTile(Tile newTile){
+    public void moveToTile(Tile newTile){
 
         currentTile = newTile;
+        hasMoved = true;
     }
 }

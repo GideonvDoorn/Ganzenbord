@@ -1,4 +1,4 @@
 package Server;
 
-public enum TileType { Default, Start, End
+public enum TileType { Default, Start, End, RollAgain, BackToStart
 }

@@ -3,7 +3,6 @@ package Shared;
 import Server.Board;
 import Server.Tile;
 import Server.TileType;
-import Shared.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,20 +11,20 @@ import java.util.Random;
 public class Game {
 
     private Player host;
-    private Player player2;
+    private Player quest;
     private Board gameBoard;
 
     private int turnNumber = 0;
     private boolean gameEnded;
 
     public boolean allPlayersMoved(){
-        return host.hasMoved() && player2.hasMoved();
+        return host.hasMoved() && quest.hasMoved();
     }
 
 
-    public Game(Player host, Player player2){
+    public Game(Player host, Player quest){
         this.host = host;
-        this.player2 = player2;
+        this.quest = quest;
 
         initializeGame();
     }
@@ -34,7 +33,7 @@ public class Game {
         gameBoard = getTestBoard();
 
         host.setCurrentTile(gameBoard.getTileByType(TileType.Start));
-        player2.setCurrentTile(gameBoard.getTileByType(TileType.Start));
+        quest.setCurrentTile(gameBoard.getTileByType(TileType.Start));
 
         System.out.println("Initialized game");
 
@@ -49,7 +48,7 @@ public class Game {
         turnNumber++;
         System.out.println("start turn " + turnNumber);
         host.setMoved(false);
-        player2.setMoved(false);
+        quest.setMoved(false);
 
     }
 
@@ -61,12 +60,14 @@ public class Game {
 
         Random rndm = new Random();
 
+
+        //get the player a new position
         int newIndex = player.getCurrentTile().getTileIndex() + ( 1 + rndm.nextInt(6));
         if(newIndex >= gameBoard.getTileByType(TileType.End).getTileIndex()){
             //player has reached the end
 
-            player.MoveToTile(gameBoard.getTileByType(TileType.End));
-            player.setMoved(true);
+            //send player its new position
+            player.moveToTile(gameBoard.getTileByType(TileType.End));
 
             System.out.println(player.getName() + " moved to the end tile!");
             System.out.println(player.getName() + " won!");
@@ -76,8 +77,11 @@ public class Game {
             return;
         }
         Tile newTile = gameBoard.getTileAtIndex(newIndex);
-        player.MoveToTile(newTile);
-        player.setMoved(true);
+
+
+        //send player its new position
+        player.moveToTile(newTile);
+
 
         System.out.println(player.getName() + " moved to tile " + newIndex);
 
