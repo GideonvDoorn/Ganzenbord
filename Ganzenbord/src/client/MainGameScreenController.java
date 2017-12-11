@@ -1,7 +1,7 @@
-package Client;
+package client;
 
-import Shared.Game;
-import Shared.Player;
+import shared.Game;
+import shared.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -17,13 +17,13 @@ public class MainGameScreenController {
     private Player player2;
 
     public MainGameScreenController(){
-        player = new Player("Pietje");
-        player2 = new Player("Henkie");
+        player = new Player("host");
+        player2 = new Player("guest");
         activeGame = new Game(player, player2);
     }
 
     @FXML
-    public void RollDieBtnClick(){
+    public void rollDieBtnClick(){
 
         //Simulate game flow
         activeGame.startMove(player);

@@ -1,6 +1,6 @@
-package Shared;
+package shared;
 
-import Server.Tile;
+import server.Tile;
 
 public class Player {
 
@@ -11,7 +11,7 @@ public class Player {
     private String name;
     private Tile currentTile;
 
-    private boolean hasMoved;
+    private boolean hasMoved = false;
 
     public boolean hasMoved() {
         return hasMoved;
@@ -21,14 +21,8 @@ public class Player {
         this.hasMoved = hasMoved;
     }
 
-
-
     public Tile getCurrentTile() {
         return currentTile;
-    }
-
-    public void setCurrentTile(Tile currentTile) {
-        this.currentTile = currentTile;
     }
 
 

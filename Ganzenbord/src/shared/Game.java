@@ -1,8 +1,8 @@
-package Shared;
+package shared;
 
-import Server.Board;
-import Server.Tile;
-import Server.TileType;
+import server.Board;
+import server.Tile;
+import server.TileType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +11,20 @@ import java.util.Random;
 public class Game {
 
     private Player host;
-    private Player quest;
+    private Player guest;
     private Board gameBoard;
 
     private int turnNumber = 0;
     private boolean gameEnded;
 
     public boolean allPlayersMoved(){
-        return host.hasMoved() && quest.hasMoved();
+        return host.hasMoved() && guest.hasMoved();
     }
 
 
-    public Game(Player host, Player quest){
+    public Game(Player host, Player guest){
         this.host = host;
-        this.quest = quest;
+        this.guest = guest;
 
         initializeGame();
     }
@@ -32,8 +32,8 @@ public class Game {
     private void initializeGame(){
         gameBoard = getTestBoard();
 
-        host.setCurrentTile(gameBoard.getTileByType(TileType.Start));
-        quest.setCurrentTile(gameBoard.getTileByType(TileType.Start));
+        host.moveToTile(gameBoard.getTileByType(TileType.START));
+        guest.moveToTile(gameBoard.getTileByType(TileType.START));
 
         System.out.println("Initialized game");
 
@@ -41,15 +41,15 @@ public class Game {
     }
 
     public void startTurn() {
-        if(gameEnded){
-            return;
-        }
-
         turnNumber++;
         System.out.println("start turn " + turnNumber);
         host.setMoved(false);
-        quest.setMoved(false);
+        guest.setMoved(false);
 
+    }
+
+    public boolean getGameEnded(){
+        return  gameEnded;
     }
 
     public void startMove(Player player) {
@@ -63,11 +63,11 @@ public class Game {
 
         //get the player a new position
         int newIndex = player.getCurrentTile().getTileIndex() + ( 1 + rndm.nextInt(6));
-        if(newIndex >= gameBoard.getTileByType(TileType.End).getTileIndex()){
+        if(newIndex >= gameBoard.getTileByType(TileType.END).getTileIndex()){
             //player has reached the end
 
             //send player its new position
-            player.moveToTile(gameBoard.getTileByType(TileType.End));
+            player.moveToTile(gameBoard.getTileByType(TileType.END));
 
             System.out.println(player.getName() + " moved to the end tile!");
             System.out.println(player.getName() + " won!");
@@ -90,17 +90,17 @@ public class Game {
     }
 
     private Board getTestBoard(){
-        List<Tile> tiles = new ArrayList<Tile>();
+        List<Tile> tiles = new ArrayList<>();
 
         int maxTiles = 20;
         for(int i = 0; i < maxTiles; i++) {
 
             if (i == 0) {
-                tiles.add(new Tile(i, TileType.Start));
+                tiles.add(new Tile(i, TileType.START));
             } else if (i == maxTiles -1) {
-                tiles.add(new Tile(i, TileType.End));
+                tiles.add(new Tile(i, TileType.END));
             } else {
-                tiles.add(new Tile(i, TileType.Default));
+                tiles.add(new Tile(i, TileType.DEFAULT));
             }
         }
         return new Board(tiles);
