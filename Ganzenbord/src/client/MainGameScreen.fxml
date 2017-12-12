@@ -14,11 +14,11 @@
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
+      <RowConstraints maxHeight="400.0" minHeight="400.0" prefHeight="400.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane>
          <children>
             <Label layoutX="32.0" layoutY="24.0" text="Ganzenbord">
                <font>
