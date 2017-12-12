@@ -143,6 +143,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/MainMenuScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/MainMenuScreenController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/RegisterScreen.fxml">
           <value>
             <set />
