@@ -193,6 +193,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/utils/CustomLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/utils/GameLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
       </map>
     </option>
   </component>

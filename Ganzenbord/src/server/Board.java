@@ -1,14 +1,33 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
 
     List<Tile> tiles;
 
-    public Board(List<Tile> tiles){
-        this.tiles = tiles;
+    public Board(){
+        tiles = new ArrayList<>();
+        generateBoard();
+
     }
+
+    private void generateBoard(){
+
+        int maxTiles = 20;
+        for(int i = 0; i < maxTiles; i++) {
+
+            if (i == 0) {
+                tiles.add(new Tile(i, TileType.START));
+            } else if (i == maxTiles -1) {
+                tiles.add(new Tile(i, TileType.END));
+            } else {
+                tiles.add(new Tile(i, TileType.DEFAULT));
+            }
+        }
+    }
+
 
     public Tile getTileAtIndex(int index){
 

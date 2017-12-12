@@ -3,12 +3,17 @@ package shared;
 import server.Board;
 import server.Tile;
 import server.TileType;
+import utils.GameLogger;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+
 
 public class Game {
+
+
+
+
 
     private Player host;
     private Player guest;
@@ -26,23 +31,27 @@ public class Game {
         this.host = host;
         this.guest = guest;
 
+        GameLogger.setLoggerLevel(Level.INFO);
+
         initializeGame();
     }
 
     private void initializeGame(){
-        gameBoard = getTestBoard();
+        gameBoard = new Board();
 
         host.moveToTile(gameBoard.getTileByType(TileType.START));
         guest.moveToTile(gameBoard.getTileByType(TileType.START));
 
-        System.out.println("Initialized game");
+        GameLogger.logMessage("Initialized game!", Level.INFO);
 
         startTurn();
     }
 
     public void startTurn() {
         turnNumber++;
-        System.out.println("start turn " + turnNumber);
+
+        GameLogger.logMessage(String.format("start turn %s", turnNumber), Level.INFO);
+
         host.setMoved(false);
         guest.setMoved(false);
 
@@ -69,8 +78,10 @@ public class Game {
             //send player its new position
             player.moveToTile(gameBoard.getTileByType(TileType.END));
 
-            System.out.println(player.getName() + " moved to the end tile!");
-            System.out.println(player.getName() + " won!");
+
+            GameLogger.logMessage(String.format("%s moved to the end tile!" , player.getName()), Level.INFO);
+            GameLogger.logMessage(String.format("%s won!", player.getName()), Level.INFO);
+
 
             gameEnded = true;
 
@@ -82,28 +93,7 @@ public class Game {
         //send player its new position
         player.moveToTile(newTile);
 
-
-        System.out.println(player.getName() + " moved to tile " + newIndex);
-
-
+        GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
 
     }
-
-    private Board getTestBoard(){
-        List<Tile> tiles = new ArrayList<>();
-
-        int maxTiles = 20;
-        for(int i = 0; i < maxTiles; i++) {
-
-            if (i == 0) {
-                tiles.add(new Tile(i, TileType.START));
-            } else if (i == maxTiles -1) {
-                tiles.add(new Tile(i, TileType.END));
-            } else {
-                tiles.add(new Tile(i, TileType.DEFAULT));
-            }
-        }
-        return new Board(tiles);
-    }
-
 }

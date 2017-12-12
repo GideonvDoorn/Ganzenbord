@@ -6,55 +6,47 @@ import server.Board;
 import server.Tile;
 import server.TileType;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
     private Board testBoard;
-    private Tile tile0;
-    private Tile tile1;
 
 
 
     @BeforeEach
     void board() {
-
-        List<Tile> tiles = new ArrayList<>();
-
-        tile0 = new Tile(0, TileType.START);
-        tile1 = new Tile(1, TileType.DEFAULT);
-
-        tiles.add(tile0);
-        tiles.add(tile1);
-
-
-        testBoard = new Board(tiles);
+        testBoard = new Board();
     }
 
 
     @Test
     void getTileAtIndex() {
 
-        assertEquals(tile1, testBoard.getTileAtIndex(1));
+        Tile tile = new Tile(0, TileType.START);
+
+        assertEquals(tile.getType(), testBoard.getTileAtIndex(0).getType());
+        assertEquals(tile.getTileIndex(), testBoard.getTileAtIndex(0).getTileIndex());
     }
 
     @Test
     void getTileAtIndexNull() {
 
-        assertEquals(null, testBoard.getTileAtIndex(2));
+        assertEquals(null, testBoard.getTileAtIndex(-1));
     }
 
     @Test
     void getTileByType() {
-        assertEquals(tile0, testBoard.getTileByType(TileType.START));
+        Tile tile = new Tile(0, TileType.START);
+
+        assertEquals(tile.getType(), testBoard.getTileByType(TileType.START).getType());
+        assertEquals(tile.getTileIndex(), testBoard.getTileByType(TileType.START).getTileIndex());
     }
 
     @Test
     void getTileByTypeNull() {
-        assertEquals(null, testBoard.getTileByType(TileType.END));
+        assertEquals(null, testBoard.getTileByType(null));
     }
 
 }
