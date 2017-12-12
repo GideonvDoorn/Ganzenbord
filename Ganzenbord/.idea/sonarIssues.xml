@@ -123,6 +123,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/JoinGameScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/LobbyScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/LobbyScreenController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/LoginScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/Main.java">
           <value>
             <set />
@@ -134,6 +154,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/client/MainGameScreenController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/MainMenuScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/MainMenuScreenController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/RegisterScreen.fxml">
           <value>
             <set />
           </value>
