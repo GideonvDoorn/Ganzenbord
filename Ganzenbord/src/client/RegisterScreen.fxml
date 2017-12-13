@@ -7,21 +7,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.RegisterScreenController">
    <children>
-      <TextField layoutX="226.0" layoutY="141.0" />
-      <PasswordField layoutX="226.0" layoutY="198.0" />
-      <PasswordField layoutX="226.0" layoutY="243.0" />
+      <TextField fx:id="tfUsername" layoutX="226.0" layoutY="141.0" />
+      <PasswordField fx:id="tfPassword" layoutX="226.0" layoutY="198.0" />
+      <PasswordField fx:id="tfRepeatPassword" layoutX="226.0" layoutY="243.0" />
       <Label layoutX="226.0" layoutY="115.0" text="Gebruikersnaam" />
       <Label layoutX="226.0" layoutY="174.0" text="Wachtwoord" />
       <Label layoutX="226.0" layoutY="223.0" text="Herhaal wachtwoord" />
-      <Button layoutX="466.0" layoutY="37.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Cancel" />
-      <Button layoutX="226.0" layoutY="297.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Register" />
+      <Button fx:id="btnCancel" layoutX="466.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnCancelOnClick" prefHeight="25.0" prefWidth="100.0" text="Cancel" />
+      <Button fx:id="btnRegister" layoutX="226.0" layoutY="297.0" mnemonicParsing="false" onAction="#btnRegisterOnClick" prefHeight="25.0" prefWidth="149.0" text="Register" />
       <Label layoutX="32.0" layoutY="14.0" prefHeight="62.0" prefWidth="343.0" text="Ganzenbord">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
+      <Label fx:id="lblRegisterError" layoutX="226.0" layoutY="268.0" prefHeight="17.0" prefWidth="149.0" textFill="#801313" />
    </children>
 </AnchorPane>

@@ -46,7 +46,7 @@ public class UITools {
             Scene scene = new Scene(root);
             if(stage == null){
                 stage = new Stage();
-                stage.setTitle("g");
+                stage.setTitle("");
                 stage.setScene(scene);
                 stage.show();
                 stage.setResizable(false);

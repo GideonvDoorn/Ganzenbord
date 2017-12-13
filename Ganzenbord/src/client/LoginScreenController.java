@@ -24,7 +24,7 @@ public class LoginScreenController {
             return;
         }
 
-        //TODO: -Database- check if login matches an user
+        //TODO: -Database, loginserver- check if login matches an user
 
         //Switch to MainMenuPanel
         UITools.UIManager uiManager = new UITools.UIManager();
