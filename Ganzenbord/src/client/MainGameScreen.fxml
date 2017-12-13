@@ -25,12 +25,11 @@
                   <Font size="48.0" />
                </font>
             </Label>
-            <Button layoutX="520.0" layoutY="59.0" mnemonicParsing="false" text="Uitloggen" />
             <Label layoutX="398.0" layoutY="32.0" text="Gebruikersnaam:" />
-            <Label layoutX="520.0" layoutY="32.0" text="USERNAME" />
+            <Label fx:id="lblUsername" layoutX="520.0" layoutY="32.0" text="USERNAME" />
             <Pane layoutX="32.0" layoutY="107.0" prefHeight="237.0" prefWidth="431.0" style="-fx-border-color: #000000; -fx-border-image-width: 1;" />
-            <Button fx:id="btnRollDie" layoutX="471.0" layoutY="284.0" mnemonicParsing="false" onAction="#rollDieBtnClick" prefHeight="60.0" prefWidth="111.0" text="Gooi dobbelsteen" />
-            <Button layoutX="14.0" layoutY="362.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Quit game" />
+            <Button fx:id="btnRollDie" layoutX="471.0" layoutY="284.0" mnemonicParsing="false" onAction="#btnRollDieOnClick" prefHeight="60.0" prefWidth="111.0" text="Gooi dobbelsteen" />
+            <Button fx:id="btnQuit" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnQuitOnClick" prefHeight="25.0" prefWidth="79.0" text="Quit game" />
          </children>
       </AnchorPane>
    </children>
