@@ -22,6 +22,10 @@ public class RegisterScreenController {
             lblRegisterError.setText("Please fill in all fields");
             return;
         }
+        if(tfUsername.getText().length() > 12){
+            lblRegisterError.setText("Username too long");
+            return;
+        }
         if(!tfPassword.getText().equals(tfRepeatPassword.getText())){
             lblRegisterError.setText("Passwords do not match");
             return;
