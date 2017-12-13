@@ -12,14 +12,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("MainGameScreen.fxml"));
-        primaryStage.setTitle("Ganzenbord");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.show();
-
-
-
-
+        UITools.UIManager uiManager = new UITools.UIManager();
+        uiManager.loadFXML("LoginScreen.fxml");
     }
 
 
