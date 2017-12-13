@@ -128,6 +128,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/JoinGameScreenController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/LobbyScreen.fxml">
           <value>
             <set />
@@ -139,6 +144,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/client/LoginScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/LoginScreenController.java">
           <value>
             <set />
           </value>
@@ -163,12 +173,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/MainMenuScreen.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/MainMenuScreenController.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/client/RegisterScreen.fxml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/RegisterScreenController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/UITools.java">
           <value>
             <set />
           </value>
@@ -234,6 +259,31 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/utils/GameLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/utils/UITools.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../KochFractalRepo/SceneSwitchTest/src/sample/Controller1.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../KochFractalRepo/SceneSwitchTest/src/sample/Controller2.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../KochFractalRepo/SceneSwitchTest/src/sample/Main1.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../KochFractalRepo/SceneSwitchTest/src/sample/UITools.java">
           <value>
             <set />
           </value>

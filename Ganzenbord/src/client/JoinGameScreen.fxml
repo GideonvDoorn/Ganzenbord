@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.JoinGameScreenController">
    <children>
       <Label layoutX="32.0" layoutY="24.0" text="Ganzenbord">
@@ -14,11 +13,12 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button layoutX="520.0" layoutY="59.0" mnemonicParsing="false" text="Uitloggen" />
+      <Button layoutX="520.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" text="Uitloggen" />
       <Label layoutX="398.0" layoutY="32.0" text="Gebruikersnaam:" />
-      <Label layoutX="520.0" layoutY="32.0" text="USERNAME" />
+      <Label fx:id="lblUsername" layoutX="520.0" layoutY="32.0" text="USERNAME" />
       <Label layoutX="52.0" layoutY="136.0" text="Game ID" />
-      <TextField layoutX="52.0" layoutY="160.0" />
-      <Button layoutX="57.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Spel joinen" />
+      <TextField fx:id="tfGameCode" layoutX="52.0" layoutY="160.0" />
+      <Button layoutX="57.0" layoutY="215.0" mnemonicParsing="false" onAction="#btnJoinGameOnClick" prefHeight="25.0" prefWidth="139.0" text="Spel joinen" />
+      <Label fx:id="lblError" layoutX="52.0" layoutY="192.0" prefHeight="17.0" prefWidth="275.0" textFill="#861111" />
    </children>
 </AnchorPane>
