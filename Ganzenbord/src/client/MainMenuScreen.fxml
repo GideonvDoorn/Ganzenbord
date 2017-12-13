@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.MainMenuScreenController">
    <children>
       <Label layoutX="22.0" layoutY="14.0" text="Ganzenbord">
@@ -13,10 +12,10 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button layoutX="43.0" layoutY="169.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Spel starten" />
-      <Button layoutX="43.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Spel joinen" />
-      <Button layoutX="510.0" layoutY="49.0" mnemonicParsing="false" text="Uitloggen" />
+      <Button layoutX="43.0" layoutY="168.0" mnemonicParsing="false" onAction="#btnStartGameOnClick" prefHeight="25.0" prefWidth="139.0" text="Spel starten" />
+      <Button layoutX="43.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnJoinGameOnClick" prefHeight="25.0" prefWidth="139.0" text="Spel joinen" />
+      <Button layoutX="510.0" layoutY="49.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" text="Uitloggen" />
       <Label layoutX="388.0" layoutY="22.0" text="Gebruikersnaam:" />
-      <Label layoutX="510.0" layoutY="22.0" text="USERNAME" />
+      <Label fx:id="lblUsername" layoutX="510.0" layoutY="22.0" text="USERNAME" />
    </children>
 </AnchorPane>

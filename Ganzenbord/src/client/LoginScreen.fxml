@@ -20,6 +20,6 @@
       <Label layoutX="226.0" layoutY="184.0" text="Gebruikersnaam" />
       <Label layoutX="226.0" layoutY="249.0" text="Wachtwoord" />
       <PasswordField fx:id="tfPassword" layoutX="226.0" layoutY="283.0" />
-      <Label fx:id="lblLoginError" layoutX="226.0" layoutY="308.0" prefHeight="25.0" prefWidth="233.0" textFill="#dd1818" />
+      <Label fx:id="lblLoginError" layoutX="226.0" layoutY="308.0" prefHeight="25.0" prefWidth="233.0" textFill="#6a0808"/>
    </children>
 </AnchorPane>
