@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Basic register screen functionality">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/LoginScreen.fxml" afterPath="$PROJECT_DIR$/src/client/LoginScreen.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/MainMenuScreen.fxml" afterPath="$PROJECT_DIR$/src/client/MainMenuScreen.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/MainMenuScreen.java" afterPath="$PROJECT_DIR$/src/client/MainMenuScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/LobbyScreen.fxml" afterPath="$PROJECT_DIR$/src/client/LobbyScreen.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/LobbyScreenController.java" afterPath="$PROJECT_DIR$/src/client/LobbyScreenController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/LoginScreenController.java" afterPath="$PROJECT_DIR$/src/client/LoginScreenController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/Main.java" afterPath="$PROJECT_DIR$/src/client/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/MainMenuScreenController.java" afterPath="$PROJECT_DIR$/src/client/MainMenuScreenController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/RegisterScreenController.java" afterPath="$PROJECT_DIR$/src/client/RegisterScreenController.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -88,8 +89,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="204">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -97,38 +98,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginScreenController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/LoginScreenController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterScreenController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/RegisterScreenController.java">
+      <file leaf-file-name="LobbyScreen.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/LobbyScreen.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterScreen.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/RegisterScreen.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding>
-                <marker date="1513189096878" expanded="true" signature="1574:1587" ph="..." />
-              </folding>
+              <caret line="17" column="38" lean-forward="false" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder">
@@ -139,23 +114,10 @@
       <file leaf-file-name="UITools.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/UITools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state relative-caret-position="68">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenuScreen.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/MainMenuScreen.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
           </provider>
         </entry>
       </file>
@@ -171,14 +133,58 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenuScreenController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client/MainMenuScreenController.java">
+      <file leaf-file-name="LoginScreenController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/LoginScreenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="190">
+              <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainMenuScreenController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/MainMenuScreenController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="464">
+              <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JoinGameScreenController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/JoinGameScreenController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LobbyScreenController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/LobbyScreenController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FXMLLoader.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="2408" column="0" lean-forward="false" selection-start-line="2408" selection-start-column="0" selection-end-line="2408" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -193,18 +199,6 @@
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainGameScreenController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/MainGameScreenController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
           </provider>
         </entry>
       </file>
@@ -264,16 +258,17 @@
         <option value="$PROJECT_DIR$/src/shared/Game.java" />
         <option value="$PROJECT_DIR$/src/client/RegisterScreen.fxml" />
         <option value="$PROJECT_DIR$/src/client/MainMenuScreen.fxml" />
-        <option value="$PROJECT_DIR$/src/client/LobbyScreenController.java" />
-        <option value="$PROJECT_DIR$/src/client/LobbyScreen.fxml" />
         <option value="$PROJECT_DIR$/src/client/JoinGameScreen.fxml" />
         <option value="$PROJECT_DIR$/src/client/MainGameScreen.fxml" />
         <option value="$PROJECT_DIR$/src/client/Main.java" />
-        <option value="$PROJECT_DIR$/src/client/UITools.java" />
         <option value="$PROJECT_DIR$/src/client/MainMenuScreen.java" />
         <option value="$PROJECT_DIR$/src/client/RegisterScreenController.java" />
         <option value="$PROJECT_DIR$/src/client/LoginScreen.fxml" />
         <option value="$PROJECT_DIR$/src/client/LoginScreenController.java" />
+        <option value="$PROJECT_DIR$/src/utils/UITools.java" />
+        <option value="$PROJECT_DIR$/src/client/LobbyScreenController.java" />
+        <option value="$PROJECT_DIR$/src/client/UITools.java" />
+        <option value="$PROJECT_DIR$/src/client/LobbyScreen.fxml" />
         <option value="$PROJECT_DIR$/src/client/MainMenuScreenController.java" />
       </list>
     </option>
@@ -285,7 +280,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="924" />
     <option name="height" value="1047" />
@@ -677,7 +672,7 @@
       <workItem from="1513161245328" duration="635000" />
       <workItem from="1513163900144" duration="35000" />
       <workItem from="1513164035496" duration="41000" />
-      <workItem from="1513181932979" duration="6822000" />
+      <workItem from="1513181932979" duration="8325000" />
     </task>
     <task id="LOCAL-00001" summary="Start game logic">
       <created>1512226869712</created>
@@ -770,7 +765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513190038119</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Basic main menu screen functionality">
+      <created>1513193311933</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1513193311933</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -806,10 +808,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46075000" />
+    <option name="totallyTimeSpent" value="47578000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="924" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -821,12 +823,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32441112" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32131496" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3017621" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21041666" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="SonarLint" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32661718" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SonarQube" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -910,7 +912,8 @@
     <MESSAGE value="Designed Game screen" />
     <MESSAGE value="Screen switching and login basic functionality" />
     <MESSAGE value="Basic register screen functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic register screen functionality" />
+    <MESSAGE value="Basic main menu screen functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic main menu screen functionality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -921,18 +924,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/shared/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1513096823375" expanded="false" signature="1154:1164" ph=" { " />
-            <marker date="1513096823375" expanded="false" signature="1182:1188" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/shared/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1271,33 +1262,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/LobbyScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/LobbyScreen.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/JoinGameScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/JoinGameScreen.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -1318,54 +1282,6 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/MainMenuScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/MainGameScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/RegisterScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/UITools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/MainMenuScreen.fxml">
@@ -1392,6 +1308,82 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/RegisterScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/MainGameScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/JoinGameScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/MainMenuScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/LobbyScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="2408" column="0" lean-forward="false" selection-start-line="2408" selection-start-column="0" selection-end-line="2408" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/LoginScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/LoginScreen.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1403,20 +1395,29 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/LoginScreenController.java">
+    <entry file="file://$PROJECT_DIR$/src/client/UITools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/LobbyScreen.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="38" lean-forward="false" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/MainMenuScreenController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="464">
+          <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
