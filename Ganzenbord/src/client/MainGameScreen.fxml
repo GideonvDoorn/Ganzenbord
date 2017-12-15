@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.MainGameScreenController">
@@ -18,16 +19,48 @@
       <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
    </rowConstraints>
    <children>
-      <AnchorPane>
+      <AnchorPane prefHeight="400.0" prefWidth="592.0">
          <children>
-            <Label layoutX="32.0" layoutY="24.0" text="Ganzenbord">
+            <Label layoutX="32.0" layoutY="14.0" text="Ganzenbord">
                <font>
                   <Font size="48.0" />
                </font>
             </Label>
             <Label layoutX="398.0" layoutY="32.0" text="Gebruikersnaam:" />
             <Label fx:id="lblUsername" layoutX="520.0" layoutY="32.0" text="USERNAME" />
-            <Pane layoutX="32.0" layoutY="107.0" prefHeight="237.0" prefWidth="431.0" style="-fx-border-color: #000000; -fx-border-image-width: 1;" />
+            <Pane fx:id="pnlGamePanel" layoutX="32.0" layoutY="99.0" prefHeight="245.0" prefWidth="431.0" style="-fx-border-color: #000000; -fx-border-image-width: 1;">
+               <children>
+                  <Pane fx:id="pnlStart" layoutX="42.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;">
+                     <children>
+                        <Circle fx:id="circlePlayer1" fill="DODGERBLUE" layoutX="16.0" layoutY="14.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circlePlayer2" fill="#ff1f1f" layoutX="16.0" layoutY="38.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children></Pane>
+                  <Pane fx:id="pnl1" layoutX="73.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl2" layoutX="105.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl3" layoutX="137.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl4" layoutX="169.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl5" layoutX="201.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl6" layoutX="233.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl7" layoutX="265.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl8" layoutX="297.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl9" layoutX="329.0" layoutY="186.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl11" layoutX="361.0" layoutY="154.0" prefHeight="32.0" prefWidth="62.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl12" layoutX="361.0" layoutY="122.0" prefHeight="32.0" prefWidth="62.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl13" layoutX="361.0" layoutY="90.0" prefHeight="32.0" prefWidth="62.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl14" layoutX="361.0" layoutY="58.0" prefHeight="32.0" prefWidth="62.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnlEnd" layoutX="42.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl24" layoutX="73.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl23" layoutX="105.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl22" layoutX="137.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl21" layoutX="169.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl20" layoutX="201.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl19" layoutX="233.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl18" layoutX="265.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl17" layoutX="297.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl16" layoutX="329.0" layoutY="8.0" prefHeight="52.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl10" layoutX="361.0" layoutY="186.0" prefHeight="52.0" prefWidth="62.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+                  <Pane fx:id="pnl15" layoutX="361.0" layoutY="8.0" prefHeight="52.0" prefWidth="62.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
+               </children></Pane>
             <Button fx:id="btnRollDie" layoutX="471.0" layoutY="284.0" mnemonicParsing="false" onAction="#btnRollDieOnClick" prefHeight="60.0" prefWidth="111.0" text="Gooi dobbelsteen" />
             <Button fx:id="btnQuit" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnQuitOnClick" prefHeight="25.0" prefWidth="79.0" text="Quit game" />
          </children>
