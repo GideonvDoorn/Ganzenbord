@@ -11,10 +11,6 @@ import java.util.logging.Level;
 
 public class Game {
 
-
-
-
-
     private Player host;
     private Player guest;
     private Board gameBoard;
@@ -61,10 +57,10 @@ public class Game {
         return  gameEnded;
     }
 
-    public void startMove(Player player) {
+    public Tile startMove(Player player) {
         // starts moving player
         if(gameEnded){
-            return;
+            return gameBoard.getTileByType(TileType.END);
         }
 
         Random rndm = new Random();
@@ -76,24 +72,21 @@ public class Game {
             //player has reached the end
 
             //send player its new position
-            player.moveToTile(gameBoard.getTileByType(TileType.END));
-
-
             GameLogger.logMessage(String.format("%s moved to the end tile!" , player.getName()), Level.INFO);
             GameLogger.logMessage(String.format("%s won!", player.getName()), Level.INFO);
-
-
             gameEnded = true;
-
-            return;
+            return gameBoard.getTileByType(TileType.END);
+//
+//            player.moveToTile(gameBoard.getTileByType(TileType.END));
         }
-        Tile newTile = gameBoard.getTileAtIndex(newIndex);
-
-
-        //send player its new position
-        player.moveToTile(newTile);
 
         GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
+        return gameBoard.getTileAtIndex(newIndex);
+
+
+
+
+
 
     }
 }
