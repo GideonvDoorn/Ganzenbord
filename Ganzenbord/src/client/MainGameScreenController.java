@@ -20,7 +20,6 @@ import java.util.logging.Level;
 public class MainGameScreenController {
 
     private static final int NORMAL_STEP = 32;
-    private static final int CORNER_STEP = 50;
 
     int directionState = 0;
     int directionState2 = 0;
@@ -77,9 +76,6 @@ public class MainGameScreenController {
 
         panels = new ArrayList<>(Arrays.asList(pnlStart, pnl1, pnl2, pnl3, pnl4, pnl5, pnl6, pnl7, pnl8, pnl9, pnl10, pnl11, pnl12, pnl13, pnl14, pnl15, pnl16, pnl17, pnl18, pnl19, pnl20, pnl21, pnl22, pnl23, pnl24, pnlEnd));
 
-
-
-
         //TODO: -Database, loginserver- get current user name, and put it in this label
         lblUsername.setText("Gideon -test");
     }
@@ -98,12 +94,7 @@ public class MainGameScreenController {
 
         player.moveToTile(newTile);
 
-        animatePlayerToTile(newTile, currentTile, true);
         animatePlayerToTile(newTile, currentTile, false);
-
-
-
-        player2.moveToTile(activeGame.startMove(player2));
 
         if(activeGame.getGameEnded()){
             return;
@@ -123,15 +114,11 @@ public class MainGameScreenController {
             for(int i = 0; i < tileToMoveTo.getTileIndex() - currentTile.getTileIndex(); i++){
 
 
-                if(currentIteratorIndex == 9){
 
-                }
                 if(currentIteratorIndex == 10){
                     directionState = 1;
                 }
-                if(currentIteratorIndex == 14){
 
-                }
                 if(currentIteratorIndex == 15){
                     directionState = 2;
                 }
@@ -190,5 +177,4 @@ public class MainGameScreenController {
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("MainMenuScreen.fxml");
     }
-
 }
