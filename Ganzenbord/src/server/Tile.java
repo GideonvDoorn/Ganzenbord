@@ -1,6 +1,8 @@
 package server;
 
-public class Tile {
+import java.io.Serializable;
+
+public class Tile implements Serializable {
 
 
     private int tileIndex;
