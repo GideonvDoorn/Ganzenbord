@@ -9,12 +9,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import login.User;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class UITools {
+
+    public static User loggedInUser;
     public static class UIManager {
+
+
         /**
          * The current window
          */

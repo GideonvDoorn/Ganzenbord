@@ -82,11 +82,5 @@ public class Game {
 
         GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
         return gameBoard.getTileAtIndex(newIndex);
-
-
-
-
-
-
     }
 }
