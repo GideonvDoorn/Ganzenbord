@@ -17,7 +17,7 @@ public class JoinGameScreenController {
     @FXML
     public void initialize() {
         //TODO: -Database, loginserver- get current user name, and put it in this label
-        lblUsername.setText("Gideon -test");
+        lblUsername.setText(UITools.loggedInUser.getUsername());
     }
 
 
