@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import login.ILoginServer;
-import login.LoginServer;
+import login.ILoginManager;
+import login.LoginManager;
 
 import java.rmi.RemoteException;
 
 public class RegisterScreenController {
 
-    ILoginServer loginServer = new LoginServer();
+    ILoginManager loginServer = new LoginManager();
 
     @FXML
     public Button btnRegister;
