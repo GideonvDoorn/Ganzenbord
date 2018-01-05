@@ -2,15 +2,21 @@ package login;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 import java.util.Properties;
 
-public class LoginServer implements ILoginServer {
+public class LoginServer extends UnicastRemoteObject implements ILoginServer {
+
 
     private Properties props;
     private PreparedStatement InsertStatement = null;
     private Statement myStmt = null;
     Connection myConn = null;
+
+    public LoginServer() throws RemoteException {
+    }
 
     @Override
     public User loginUser(String username, String password) {

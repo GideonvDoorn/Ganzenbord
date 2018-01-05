@@ -8,6 +8,8 @@ import login.ILoginServer;
 import login.LoginServer;
 import login.User;
 
+import java.rmi.RemoteException;
+
 public class LoginScreenController {
 
     private final ILoginServer loginServer = new LoginServer();
@@ -36,7 +38,14 @@ public class LoginScreenController {
 
         //TODO: -Database, loginserver- check if login matches an user
 
-        User u = loginServer.loginUser(tfUsername.getText(), tfPassword.getText());
+        User u = null;
+        try{
+            u = loginServer.loginUser(tfUsername.getText(), tfPassword.getText());
+
+        }
+        catch (RemoteException ex){
+
+        }
 
         if(u == null){
             lblLoginError.setText("Incorrect username or password");

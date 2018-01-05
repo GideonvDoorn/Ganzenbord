@@ -1,10 +1,13 @@
 package login;
 
-public interface ILoginServer {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-    User loginUser(String username, String password);
-    boolean registerUser(String username, String password);
-    boolean logoutUser(String username);
+public interface ILoginServer extends Remote {
+
+    User loginUser(String username, String password) throws RemoteException;
+    boolean registerUser(String username, String password) throws RemoteException;
+    boolean logoutUser(String username) throws RemoteException;
 
 
 }
