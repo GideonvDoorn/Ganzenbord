@@ -84,12 +84,6 @@ public class Game extends UnicastRemoteObject implements IGame  {
 
 //        GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
         return gameBoard.getTileAtIndex(newIndex);
-
-
-
-
-
-
     }
 
 //    @Override

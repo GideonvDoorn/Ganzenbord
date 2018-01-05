@@ -4,8 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import login.ILoginServer;
+import login.LoginServer;
 
 public class RegisterScreenController {
+
+    ILoginServer loginServer = new LoginServer();
 
     @FXML
     public Button btnRegister;
@@ -33,7 +37,12 @@ public class RegisterScreenController {
 
 
         //TODO: -Database, loginserver- Create user
-
+        if(loginServer.registerUser(tfUsername.getText(), tfPassword.getText())){
+            lblRegisterError.setText("Succesfully created a user!");
+        }
+        else{
+            lblRegisterError.setText("ERROR, creating user failed!");
+        }
 
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("LoginScreen.fxml");
