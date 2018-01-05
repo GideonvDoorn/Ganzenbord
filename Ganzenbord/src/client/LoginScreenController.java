@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import login.ILoginServer;
+import login.ILoginManager;
+import login.LoginManager;
 import login.LoginServer;
 import login.User;
 
@@ -12,7 +13,6 @@ import java.rmi.RemoteException;
 
 public class LoginScreenController {
 
-    private final ILoginServer loginServer = new LoginServer();
 
     @FXML
     public Button btnLogin;
@@ -32,6 +32,14 @@ public class LoginScreenController {
 
     public void btnLoginOnClick(){
 
+        LoginClient loginClient = new LoginClient("192.168.2.47", 1099);
+        ILoginManager loginManager = loginClient.loginManager;
+
+        if(loginManager == null){
+            lblLoginError.setText("Server error, try again later");
+            return;
+        }
+
         //Check if fields are filled in
         if(tfUsername.getText().isEmpty() || tfPassword.getText().isEmpty()){
             lblLoginError.setText("Please fill in all fields");
@@ -42,10 +50,11 @@ public class LoginScreenController {
 
         User u = null;
         try{
-            u = loginServer.loginUser(tfUsername.getText(), tfPassword.getText());
+            u = loginManager.loginUser(tfUsername.getText(), tfPassword.getText());
 
         }
         catch (RemoteException ex){
+            lblLoginError.setText("Server error, try again later");
 
         }
 

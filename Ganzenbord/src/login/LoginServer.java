@@ -1,133 +1,114 @@
 package login;
 
-import java.io.ByteArrayInputStream;
-import java.io.ObjectInputStream;
+import shared.Player;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.sql.*;
-import java.util.Properties;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Enumeration;
 
-public class LoginServer extends UnicastRemoteObject implements ILoginServer {
+public class LoginServer {
 
+    // Set port number
+    private static final int portNumber = 1099;
 
-    private Properties props;
-    private PreparedStatement InsertStatement = null;
-    private Statement myStmt = null;
-    Connection myConn = null;
+    // Set binding name for Effectenbeurs
+    private static final String bindingName = "login";
 
-    public LoginServer() throws RemoteException {
+    // References to registry and Effectenbeurs
+    private Registry registry = null;
+    private ILoginManager loginManager = null;
+
+    public LoginServer(){
+        // Print port number for registry
+        System.out.println("Server: Port number " + portNumber);
+
+        //create a loginmanager
+        try {
+            loginManager = new LoginManager();
+
+            System.out.println("Server: loginManager created");
+        } catch (RemoteException ex) {
+            System.out.println("Server: Cannot create Game");
+            System.out.println("Server: RemoteException: " + ex.getMessage());
+            loginManager = null;
+        }
+
+        // Create registry at port number
+        try {
+            registry = LocateRegistry.createRegistry(portNumber);
+            System.out.println("Server: Registry created on IP address :" + registry.toString());
+            System.out.println("Server: Registry created on port number : " + portNumber);
+        } catch (RemoteException ex) {
+            System.out.println("Server: Cannot create registry");
+            System.out.println("Server: RemoteException: " + ex.getMessage());
+            registry = null;
+        }
+
+        // Bind game using registry
+        try {
+            registry.rebind(bindingName, loginManager);
+        } catch (RemoteException ex) {
+            System.out.println("Server: Cannot bind loginManager");
+            System.out.println("Server: RemoteException: " + ex.getMessage());
+        }
     }
 
-    @Override
-    public User loginUser(String username, String password) {
 
-        User u = getUserFromdb(username);
-
-        if(u == null){
-            return null;
-
-        }
-        else{
-            if(u.getPassword().equals(password)){
-                return u;
+    // Print IP addresses and network interfaces
+    private static void printIPAddresses() {
+        try {
+            InetAddress localhost = InetAddress.getLocalHost();
+            System.out.println("Server: IP Address: " + localhost.getHostAddress());
+            // Just in case this host has multiple IP addresses....
+            InetAddress[] allMyIps = InetAddress.getAllByName(localhost.getCanonicalHostName());
+            if (allMyIps != null && allMyIps.length > 1) {
+                System.out.println("Server: Full list of IP addresses:");
+                for (InetAddress allMyIp : allMyIps) {
+                    System.out.println("    " + allMyIp);
+                }
             }
-            else{
-                return null;
-            }
+        } catch (UnknownHostException ex) {
+            System.out.println("Server: Cannot get IP address of local host");
+            System.out.println("Server: UnknownHostException: " + ex.getMessage());
         }
-    }
-
-    @Override
-    public boolean registerUser(String username, String password) {
-        initConnection();
 
         try {
-
-
-
-            // Create a statement
-            InsertStatement = myConn.prepareStatement("INSERT INTO user (username, password) VALUES(?,?);");
-
-
-            InsertStatement.setString (1, username);
-            InsertStatement.setString   (2, password);
-
-            InsertStatement.execute();
-
-
-            myConn.close();
-
-
-            return true;
-        }
-        catch (Exception exc) {
-            exc.printStackTrace();
-            return false;
-
-        }
-    }
-
-    @Override
-    public boolean logoutUser(String username) {
-        return false;
-    }
-
-    private void initConnection(){
-
-        try {
-
-            // Get a connection to database
-            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ganzenbord?useSSL=false", "student" , "student");
-
-            System.out.println("Database connection successful!\n");
-
-
-
-
-        }
-        catch (Exception exc) {
-            exc.printStackTrace();
-        }
-    }
-
-
-    private User getUserFromdb(String name){
-
-        initConnection();
-        ResultSet myRs = null;
-
-        try {
-
-            // Create a statement
-            myStmt = myConn.createStatement();
-
-            // Execute SQL query
-            myRs = myStmt.executeQuery("select * from user where username = '" + name + "'");
-
-            // Process the result set
-            User u = null;
-
-            if(myRs.next()) {
-                int id = myRs.getInt("id");
-                String username = myRs.getString("username");
-                String password = myRs.getString("password");
-                u = new User(username, password);
-
+            System.out.println("Server: Full list of network interfaces:");
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+                NetworkInterface intf = en.nextElement();
+                System.out.println("    " + intf.getName() + " " + intf.getDisplayName());
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    System.out.println("        " + enumIpAddr.nextElement().toString());
+                }
             }
-            else{
-                return null;
-            }
-
-            myConn.close();
-
-
-            // return the result
-            return u;
+        } catch (SocketException ex) {
+            System.out.println("Server: Cannot retrieve network interface list");
+            System.out.println("Server: UnknownHostException: " + ex.getMessage());
         }
-        catch (Exception exc) {
-            exc.printStackTrace();
-        }
+    }
+    public static void main(String[] args){
+        final String ipAddress = "192.168.2.47";
 
-        return null;
+        // Welcome message
+        System.out.println("SERVER USING REGISTRY");
+
+        System.out.println("[before] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
+
+        // RMI on distinct IP address
+        System.setProperty("java.rmi.server.hostname", ipAddress );
+
+        System.out.println("[after] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
+
+
+        // Print IP addresses and network interfaces
+        printIPAddresses();
+
+        // Create server
+        new LoginServer();
     }
 }
