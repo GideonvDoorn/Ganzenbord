@@ -5,11 +5,13 @@ import server.Tile;
 import server.TileType;
 import utils.GameLogger;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 import java.util.logging.Level;
 
 
-public class Game {
+public class Game extends UnicastRemoteObject implements IGame  {
 
     private Player host;
     private Player guest;
@@ -23,7 +25,7 @@ public class Game {
     }
 
 
-    public Game(Player host, Player guest){
+    public Game(Player host, Player guest) throws RemoteException {
         this.host = host;
         this.guest = guest;
 
@@ -57,7 +59,7 @@ public class Game {
         return  gameEnded;
     }
 
-    public Tile startMove(Player player) {
+    public Tile startMove(int currentTile) {
         // starts moving player
         if(gameEnded){
             return gameBoard.getTileByType(TileType.END);
@@ -67,20 +69,20 @@ public class Game {
 
 
         //get the player a new position
-        int newIndex = player.getCurrentTile().getTileIndex() + ( 1 + rndm.nextInt(6));
+        int newIndex = currentTile + ( 1 + rndm.nextInt(6));
         if(newIndex >= gameBoard.getTileByType(TileType.END).getTileIndex()){
             //player has reached the end
 
             //send player its new position
-            GameLogger.logMessage(String.format("%s moved to the end tile!" , player.getName()), Level.INFO);
-            GameLogger.logMessage(String.format("%s won!", player.getName()), Level.INFO);
+//            GameLogger.logMessage(String.format("%s moved to the end tile!" , player.getName()), Level.INFO);
+//            GameLogger.logMessage(String.format("%s won!", player.getName()), Level.INFO);
             gameEnded = true;
             return gameBoard.getTileByType(TileType.END);
 //
 //            player.moveToTile(gameBoard.getTileByType(TileType.END));
         }
 
-        GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
+//        GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
         return gameBoard.getTileAtIndex(newIndex);
 
 
@@ -89,4 +91,14 @@ public class Game {
 
 
     }
+
+//    @Override
+//    public int getGameID() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void JoinGame() {
+//
+//    }
 }

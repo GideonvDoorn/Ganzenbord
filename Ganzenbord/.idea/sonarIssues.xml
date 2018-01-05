@@ -123,6 +123,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/GanzenbordClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/JoinGameScreen.fxml">
           <value>
             <set />
@@ -218,6 +223,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/server/ServerMain.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/server/Tile.java">
           <value>
             <set />
@@ -229,6 +239,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/shared/Game.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/shared/IGame.java">
           <value>
             <set />
           </value>
@@ -289,6 +304,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../../KochFractalRepo/SceneSwitchTest/src/sample/UITools.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../../Java projects/AEX-Banner - RMIpull/src/server/AEXBannerServer.java">
           <value>
             <set />
           </value>
