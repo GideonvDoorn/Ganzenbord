@@ -21,6 +21,8 @@ public class LoginScreenController {
     public TextField tfPassword;
     public Label lblLoginError;
 
+    public LoginScreenController() throws RemoteException {
+    }
 
 
     @FXML

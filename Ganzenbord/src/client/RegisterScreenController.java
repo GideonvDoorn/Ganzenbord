@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import login.ILoginServer;
 import login.LoginServer;
 
+import java.rmi.RemoteException;
+
 public class RegisterScreenController {
 
     ILoginServer loginServer = new LoginServer();
@@ -18,6 +20,9 @@ public class RegisterScreenController {
     public TextField tfPassword;
     public TextField tfRepeatPassword;
     public Label lblRegisterError;
+
+    public RegisterScreenController() throws RemoteException {
+    }
 
 
     public void btnRegisterOnClick(){
@@ -37,12 +42,19 @@ public class RegisterScreenController {
 
 
         //TODO: -Database, loginserver- Create user
-        if(loginServer.registerUser(tfUsername.getText(), tfPassword.getText())){
-            lblRegisterError.setText("Succesfully created a user!");
+
+        try{
+            if(loginServer.registerUser(tfUsername.getText(), tfPassword.getText())){
+                lblRegisterError.setText("Succesfully created a user!");
+            }
+            else{
+                lblRegisterError.setText("ERROR, creating user failed!");
+            }
         }
-        else{
-            lblRegisterError.setText("ERROR, creating user failed!");
+        catch(RemoteException ex){
+
         }
+
 
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("LoginScreen.fxml");
