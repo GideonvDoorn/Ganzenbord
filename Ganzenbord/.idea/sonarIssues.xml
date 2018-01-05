@@ -203,6 +203,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/login/ILoginServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/login/LoginServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/login/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/sample/Main.java">
           <value>
             <set />
