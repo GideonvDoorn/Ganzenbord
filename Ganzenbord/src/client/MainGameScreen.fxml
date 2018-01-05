@@ -63,6 +63,7 @@
                </children></Pane>
             <Button fx:id="btnRollDie" layoutX="471.0" layoutY="284.0" mnemonicParsing="false" onAction="#btnRollDieOnClick" prefHeight="60.0" prefWidth="111.0" text="Gooi dobbelsteen" />
             <Button fx:id="btnQuit" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnQuitOnClick" prefHeight="25.0" prefWidth="79.0" text="Quit game" />
+            <Button layoutX="471.0" layoutY="218.0" mnemonicParsing="false" onAction="#btnConnect" prefHeight="60.0" prefWidth="111.0" text="Connect" />
          </children>
       </AnchorPane>
    </children>
