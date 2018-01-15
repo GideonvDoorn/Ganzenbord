@@ -23,7 +23,7 @@ public class ServerMain {
     // Set binding name for Effectenbeurs
     private static final String bindingName = "game";
 
-    // References to registry and Effectenbeurs
+    // References to registry and game
     private Registry registry = null;
     private IGame game = null;
 
@@ -64,7 +64,7 @@ public class ServerMain {
 
 
     // Print IP addresses and network interfaces
-    private static void printIPAddresses() {
+    public static void printIPAddresses() {
         try {
             InetAddress localhost = InetAddress.getLocalHost();
             System.out.println("Server: IP Address: " + localhost.getHostAddress());
@@ -77,7 +77,7 @@ public class ServerMain {
                 }
             }
         } catch (UnknownHostException ex) {
-            System.out.println("Server: Cannot get IP address of local host");
+            System.out.println("Server: Can not get IP address of local host");
             System.out.println("Server: UnknownHostException: " + ex.getMessage());
         }
 
@@ -91,12 +91,12 @@ public class ServerMain {
                 }
             }
         } catch (SocketException ex) {
-            System.out.println("Server: Cannot retrieve network interface list");
+            System.out.println("Server: Can not retrieve network interface list");
             System.out.println("Server: UnknownHostException: " + ex.getMessage());
         }
     }
     public static void main(String[] args){
-        final String ipAddress = "192.168.2.47";
+        final String ipAddress = "145.93.76.47";
 
         // Welcome message
         System.out.println("SERVER USING REGISTRY");

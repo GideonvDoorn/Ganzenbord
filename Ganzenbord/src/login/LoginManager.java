@@ -36,7 +36,7 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
     }
 
     @Override
-    public boolean registerUser(String username, String password) {
+    public boolean registerUser(User userToAdd) {
         initConnection();
 
         try {
@@ -47,8 +47,8 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
             InsertStatement = myConn.prepareStatement("INSERT INTO user (username, password) VALUES(?,?);");
 
 
-            InsertStatement.setString (1, username);
-            InsertStatement.setString   (2, password);
+            InsertStatement.setString (1, userToAdd.getUsername());
+            InsertStatement.setString   (2, userToAdd.getPassword());
 
             InsertStatement.execute();
 

@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import login.ILoginManager;
 import login.LoginManager;
+import login.User;
 
 import java.rmi.RemoteException;
 
@@ -27,6 +28,15 @@ public class RegisterScreenController {
 
     public void btnRegisterOnClick(){
 
+        LoginClient loginClient = new LoginClient("192.168.2.19", 1099);
+        ILoginManager loginManager = loginClient.loginManager;
+
+        if(loginManager == null){
+            lblRegisterError.setText("Server error, try again later");
+            return;
+        }
+
+
         if(tfUsername.getText().isEmpty() || tfPassword.getText().isEmpty() || tfRepeatPassword.getText().isEmpty()){
             lblRegisterError.setText("Please fill in all fields");
             return;
@@ -44,7 +54,7 @@ public class RegisterScreenController {
         //TODO: -Database, loginserver- Create user
 
         try{
-            if(loginServer.registerUser(tfUsername.getText(), tfPassword.getText())){
+            if(loginManager.registerUser(new User(tfUsername.getText(), tfPassword.getText()))){
                 lblRegisterError.setText("Succesfully created a user!");
             }
             else{

@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class GanzenbordClient {
+public class GanzenbordClient implements IClient {
 
     // Set binding name for Effectenbeurs
     private static final String bindingName = "game";
@@ -17,7 +17,7 @@ public class GanzenbordClient {
     public IGame game = null;
 
     // Constructor
-    public GanzenbordClient(String ipAddress, int portNumber) {
+    public GanzenbordClient(String ipAddress, int portNumber, LoginScreenController controller) {
 
         // Print IP address and port number for registry
         System.out.println("Client: IP Address: " + ipAddress);
@@ -62,5 +62,10 @@ public class GanzenbordClient {
         } else {
             System.out.println("Client: game is null pointer");
         }
+    }
+
+    @Override
+    public void setNewState(int player1, int player2) {
+
     }
 }
