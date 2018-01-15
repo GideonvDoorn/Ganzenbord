@@ -2,7 +2,9 @@ package shared;
 
 import server.Tile;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 
     public String getName() {
         return name;

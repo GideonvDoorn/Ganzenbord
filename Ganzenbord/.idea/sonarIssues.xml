@@ -18,6 +18,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/.idea/workspace.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/Client/Main.java">
           <value>
             <set />
@@ -123,6 +128,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/GanzenbordClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/IClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/JoinGameScreen.fxml">
           <value>
             <set />
@@ -139,6 +154,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/client/LobbyScreenController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/client/LoginClient.java">
           <value>
             <set />
           </value>
@@ -203,6 +223,31 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/login/ILoginManager.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/login/ILoginServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/login/LoginManager.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/login/LoginServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/login/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/sample/Main.java">
           <value>
             <set />
@@ -218,6 +263,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/server/ServerMain.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/server/Tile.java">
           <value>
             <set />
@@ -229,6 +279,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/shared/Game.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/shared/IGame.java">
           <value>
             <set />
           </value>
@@ -268,6 +323,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/utils/IP.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/utils/UITools.java">
           <value>
             <set />
@@ -289,6 +349,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../../KochFractalRepo/SceneSwitchTest/src/sample/UITools.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../../Java projects/AEX-Banner - RMIpull/src/server/AEXBannerServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../../Java projects/ProftaakApp/ProftaakS3/Client/src/gui/RegisterController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../../PTS/S34A_Oplevering_Iteratie2/S34A_Drawingo_source/rmiTest/src/login/LoginServer.java">
           <value>
             <set />
           </value>

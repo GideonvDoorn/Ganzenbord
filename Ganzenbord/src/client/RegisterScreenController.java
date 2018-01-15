@@ -4,8 +4,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import login.ILoginManager;
+import login.LoginManager;
+import login.User;
+import utils.IP;
+
+import java.rmi.RemoteException;
 
 public class RegisterScreenController {
+
+    ILoginManager loginServer = new LoginManager();
 
     @FXML
     public Button btnRegister;
@@ -15,8 +23,20 @@ public class RegisterScreenController {
     public TextField tfRepeatPassword;
     public Label lblRegisterError;
 
+    public RegisterScreenController() throws RemoteException {
+    }
+
 
     public void btnRegisterOnClick(){
+
+        LoginClient loginClient = new LoginClient(IP.ip, 1099);
+        ILoginManager loginManager = loginClient.loginManager;
+
+        if(loginManager == null){
+            lblRegisterError.setText("Server error, try again later");
+            return;
+        }
+
 
         if(tfUsername.getText().isEmpty() || tfPassword.getText().isEmpty() || tfRepeatPassword.getText().isEmpty()){
             lblRegisterError.setText("Please fill in all fields");
@@ -33,6 +53,18 @@ public class RegisterScreenController {
 
 
         //TODO: -Database, loginserver- Create user
+
+        try{
+            if(loginManager.registerUser(new User(tfUsername.getText(), tfPassword.getText()))){
+                lblRegisterError.setText("Succesfully created a user!");
+            }
+            else{
+                lblRegisterError.setText("ERROR, creating user failed!");
+            }
+        }
+        catch(RemoteException ex){
+
+        }
 
 
         UITools.UIManager uiManager = new UITools.UIManager();

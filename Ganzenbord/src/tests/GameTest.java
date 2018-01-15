@@ -17,7 +17,7 @@ class GameTest {
     void game(){
         testHost = new Player("testHost");
         testGuest = new Player("testGuest");
-        testGame = new Game(testHost, testGuest );
+        //testGame = new Game(testHost, testGuest );
     }
 
     @Test
@@ -56,20 +56,20 @@ class GameTest {
     @Test
     void startMove() {
 
-
-        while(true){
-            //Simulate game flow
-            testGame.startMove(testHost);
-            testGame.startMove(testGuest);
-
-            if(testGame.getGameEnded()){
-                break;
-            }
-
-            if(testGame.allPlayersMoved()){
-                testGame.startTurn();
-            }
-        }
+//
+//        while(true){
+//            //Simulate game flow
+//            testGame.startMove(testHost);
+//            testGame.startMove(testGuest);
+//
+//            if(testGame.getGameEnded()){
+//                break;
+//            }
+//
+//            if(testGame.allPlayersMoved()){
+//                testGame.startTurn();
+//            }
+//        }
 
     }
 
