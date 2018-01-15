@@ -15,7 +15,7 @@ public class Board {
 
     private void generateBoard(){
 
-        int maxTiles = 26;
+        int maxTiles = 11;
         for(int i = 0; i < maxTiles; i++) {
 
             if (i == 0) {

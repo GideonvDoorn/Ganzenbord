@@ -3,7 +3,7 @@ package server;
 import shared.Game;
 import shared.IGame;
 import shared.Player;
-import utils.IP;
+import utils.IPData;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -12,11 +12,11 @@ import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.Enumeration;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class ServerMain {
+
+
 
     // Set port number
     private static final int portNumber = 1099;
@@ -27,6 +27,8 @@ public class ServerMain {
     // References to registry and game
     private Registry registry = null;
     private IGame game = null;
+
+
 
     public ServerMain(){
         // Print port number for registry
@@ -46,7 +48,7 @@ public class ServerMain {
         // Create registry at port number
         try {
             registry = LocateRegistry.createRegistry(portNumber);
-            System.out.println("Server: Registry created on IP address :" + registry.toString());
+            System.out.println("Server: Registry created on IPData address :" + registry.toString());
             System.out.println("Server: Registry created on port number : " + portNumber);
         } catch (RemoteException ex) {
             System.out.println("Server: Cannot create registry");
@@ -64,21 +66,21 @@ public class ServerMain {
     }
 
 
-    // Print IP addresses and network interfaces
+    // Print IPData addresses and network interfaces
     public static void printIPAddresses() {
         try {
             InetAddress localhost = InetAddress.getLocalHost();
-            System.out.println("Server: IP Address: " + localhost.getHostAddress());
-            // Just in case this host has multiple IP addresses....
+            System.out.println("Server: IPData Address: " + localhost.getHostAddress());
+            // Just in case this host has multiple IPData addresses....
             InetAddress[] allMyIps = InetAddress.getAllByName(localhost.getCanonicalHostName());
             if (allMyIps != null && allMyIps.length > 1) {
-                System.out.println("Server: Full list of IP addresses:");
+                System.out.println("Server: Full list of IPData addresses:");
                 for (InetAddress allMyIp : allMyIps) {
                     System.out.println("    " + allMyIp);
                 }
             }
         } catch (UnknownHostException ex) {
-            System.out.println("Server: Can not get IP address of local host");
+            System.out.println("Server: Can not get IPData address of local host");
             System.out.println("Server: UnknownHostException: " + ex.getMessage());
         }
 
@@ -97,20 +99,20 @@ public class ServerMain {
         }
     }
     public static void main(String[] args){
-        final String ipAddress = IP.ip;
+        final String ipAddress = IPData.ip;
 
         // Welcome message
         System.out.println("SERVER USING REGISTRY");
 
         System.out.println("[before] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
 
-        // RMI on distinct IP address
+        // RMI on distinct IPData address
         System.setProperty("java.rmi.server.hostname", ipAddress );
 
         System.out.println("[after] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
 
 
-        // Print IP addresses and network interfaces
+        // Print IPData addresses and network interfaces
         printIPAddresses();
 
         // Create server

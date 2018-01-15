@@ -5,10 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import login.ILoginManager;
-import login.LoginManager;
-import login.LoginServer;
 import login.User;
-import utils.IP;
+import utils.IPData;
 
 import java.rmi.RemoteException;
 
@@ -33,7 +31,7 @@ public class LoginScreenController {
 
     public void btnLoginOnClick(){
 
-        LoginClient loginClient = new LoginClient(IP.ip, 1099);
+        LoginClient loginClient = new LoginClient(IPData.ip, 1100);
         ILoginManager loginManager = loginClient.loginManager;
 
         if(loginManager == null){

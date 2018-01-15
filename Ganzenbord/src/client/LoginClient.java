@@ -19,11 +19,11 @@ public class LoginClient {
     // Constructor
     public LoginClient(String ipAddress, int portNumber) {
 
-        // Print IP address and port number for registry
-        System.out.println("Client: IP Address: " + ipAddress);
+        // Print IPData address and port number for registry
+        System.out.println("Client: IPData Address: " + ipAddress);
         System.out.println("Client: Port number " + portNumber);
 
-        // Locate registry at IP address and port number
+        // Locate registry at IPData address and port number
         try {
             registry = LocateRegistry.getRegistry(ipAddress, portNumber);
         } catch (RemoteException ex) {

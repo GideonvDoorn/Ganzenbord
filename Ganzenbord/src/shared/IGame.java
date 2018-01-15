@@ -1,5 +1,6 @@
 package shared;
 
+import client.IClient;
 import server.Tile;
 
 import java.rmi.Remote;
@@ -9,7 +10,8 @@ public interface IGame extends Remote {
 
     boolean allPlayersMoved() throws RemoteException;
     void startTurn() throws RemoteException;
-    Tile startMove(int currentTile) throws RemoteException;
+    Tile startMove(int clientID, int currentTile) throws RemoteException;
+    void registerUser(IClient client) throws RemoteException;
 //    int getGameID();
 //    void JoinGame();
 }

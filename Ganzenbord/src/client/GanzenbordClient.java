@@ -2,12 +2,13 @@ package client;
 
 import shared.IGame;
 
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class GanzenbordClient implements IClient {
+public class GanzenbordClient implements IClient, Serializable {
 
     // Set binding name for Effectenbeurs
     private static final String bindingName = "game";
@@ -16,14 +17,17 @@ public class GanzenbordClient implements IClient {
     private Registry registry = null;
     public IGame game = null;
 
+
+    MainGameScreenController controller;
+
     // Constructor
     public GanzenbordClient(String ipAddress, int portNumber, MainGameScreenController controller) {
-
-        // Print IP address and port number for registry
-        System.out.println("Client: IP Address: " + ipAddress);
+        this.controller = controller;
+        // Print IPData address and port number for registry
+        System.out.println("Client: IPData Address: " + ipAddress);
         System.out.println("Client: Port number " + portNumber);
 
-        // Locate registry at IP address and port number
+        // Locate registry at IPData address and port number
         try {
             registry = LocateRegistry.getRegistry(ipAddress, portNumber);
         } catch (RemoteException ex) {
@@ -66,6 +70,7 @@ public class GanzenbordClient implements IClient {
 
     @Override
     public void setNewState(int player1, int player2) {
-
+        System.out.println("Client values: " + player1 + " - " + player2);
+        controller.setNewState(player1, player2);
     }
 }
