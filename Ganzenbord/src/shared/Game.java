@@ -81,6 +81,7 @@ public class Game extends UnicastRemoteObject implements IGame  {
 //
 //            player.moveToTile(gameBoard.getTileByType(TileType.END));
         }
+        System.out.println("current: " + currentTile + "   -   new tile: " + newIndex);
 
 //        GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
         return gameBoard.getTileAtIndex(newIndex);

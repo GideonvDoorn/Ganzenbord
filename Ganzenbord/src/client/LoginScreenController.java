@@ -32,7 +32,7 @@ public class LoginScreenController {
 
     public void btnLoginOnClick(){
 
-        LoginClient loginClient = new LoginClient("192.168.2.47", 1099);
+        LoginClient loginClient = new LoginClient("145.93.76.47", 1099);
         ILoginManager loginManager = loginClient.loginManager;
 
         if(loginManager == null){
@@ -69,15 +69,14 @@ public class LoginScreenController {
             uiManager.loadFXML("MainMenuScreen.fxml");
 
         }
-
-
-
     }
 
     public void btnRegisterOnClick(){
+
+
+
         //Switch to MainMenuPanel
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("RegisterScreen.fxml");
     }
-
 }

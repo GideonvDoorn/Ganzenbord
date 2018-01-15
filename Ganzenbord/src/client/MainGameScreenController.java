@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 
-public class MainGameScreenController {
+public class MainGameScreenController implements IClient {
 
     private static final int NORMAL_STEP = 32;
 
@@ -90,7 +90,7 @@ public class MainGameScreenController {
     @FXML
     public void btnConnect() {
 
-        GanzenbordClient client = new GanzenbordClient("192.168.2.47", 1099);
+        GanzenbordClient client = new GanzenbordClient("145.93.76.47", 1099);
 
         activeGame = client.game;
     }
@@ -210,5 +210,10 @@ public class MainGameScreenController {
         //TODO: -Database, loginserver- logout user
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("MainMenuScreen.fxml");
+    }
+
+    @Override
+    public void setNewState(int player1, int player2) {
+
     }
 }

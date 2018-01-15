@@ -133,6 +133,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/IClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/client/JoinGameScreen.fxml">
           <value>
             <set />
@@ -214,6 +219,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/client/UITools.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/login/ILoginManager.java">
           <value>
             <set />
           </value>
@@ -339,6 +349,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../../../Java projects/AEX-Banner - RMIpull/src/server/AEXBannerServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../../Java projects/ProftaakApp/ProftaakS3/Client/src/gui/RegisterController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../../PTS/S34A_Oplevering_Iteratie2/S34A_Drawingo_source/rmiTest/src/login/LoginServer.java">
           <value>
             <set />
           </value>
