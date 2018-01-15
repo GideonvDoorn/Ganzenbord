@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import utils.GameLogger;
+import utils.IP;
 
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
@@ -90,7 +91,7 @@ public class MainGameScreenController implements IClient {
     @FXML
     public void btnConnect() {
 
-        GanzenbordClient client = new GanzenbordClient("145.93.76.47", 1099);
+        GanzenbordClient client = new GanzenbordClient(IP.ip, 1099, this);
 
         activeGame = client.game;
     }

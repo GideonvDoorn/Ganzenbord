@@ -2,6 +2,7 @@ package login;
 
 import server.ServerMain;
 import shared.Player;
+import utils.IP;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -60,7 +61,7 @@ public class LoginServer {
     }
 
     public static void main(String[] args){
-        final String ipAddress = "145.93.76.47";
+        final String ipAddress = IP.ip;
 
         // Welcome message
         System.out.println("SERVER USING REGISTRY");

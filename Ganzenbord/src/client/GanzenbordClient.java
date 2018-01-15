@@ -17,7 +17,7 @@ public class GanzenbordClient implements IClient {
     public IGame game = null;
 
     // Constructor
-    public GanzenbordClient(String ipAddress, int portNumber, LoginScreenController controller) {
+    public GanzenbordClient(String ipAddress, int portNumber, MainGameScreenController controller) {
 
         // Print IP address and port number for registry
         System.out.println("Client: IP Address: " + ipAddress);

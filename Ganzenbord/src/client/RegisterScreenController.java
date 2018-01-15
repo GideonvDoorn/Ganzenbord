@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import login.ILoginManager;
 import login.LoginManager;
 import login.User;
+import utils.IP;
 
 import java.rmi.RemoteException;
 
@@ -28,7 +29,7 @@ public class RegisterScreenController {
 
     public void btnRegisterOnClick(){
 
-        LoginClient loginClient = new LoginClient("192.168.2.19", 1099);
+        LoginClient loginClient = new LoginClient(IP.ip, 1099);
         ILoginManager loginManager = loginClient.loginManager;
 
         if(loginManager == null){

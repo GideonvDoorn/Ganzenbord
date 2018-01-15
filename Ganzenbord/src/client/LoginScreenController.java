@@ -8,6 +8,7 @@ import login.ILoginManager;
 import login.LoginManager;
 import login.LoginServer;
 import login.User;
+import utils.IP;
 
 import java.rmi.RemoteException;
 
@@ -32,7 +33,7 @@ public class LoginScreenController {
 
     public void btnLoginOnClick(){
 
-        LoginClient loginClient = new LoginClient("145.93.76.47", 1099);
+        LoginClient loginClient = new LoginClient(IP.ip, 1099);
         ILoginManager loginManager = loginClient.loginManager;
 
         if(loginManager == null){

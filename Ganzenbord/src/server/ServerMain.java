@@ -3,6 +3,7 @@ package server;
 import shared.Game;
 import shared.IGame;
 import shared.Player;
+import utils.IP;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -96,7 +97,7 @@ public class ServerMain {
         }
     }
     public static void main(String[] args){
-        final String ipAddress = "145.93.76.47";
+        final String ipAddress = IP.ip;
 
         // Welcome message
         System.out.println("SERVER USING REGISTRY");
