@@ -78,6 +78,6 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
     @Override
     public void setGameEnd(int playerWhoWonID) {
-controller.setGameEnd(playerWhoWonID);
+        controller.setGameEnd(playerWhoWonID);
     }
 }

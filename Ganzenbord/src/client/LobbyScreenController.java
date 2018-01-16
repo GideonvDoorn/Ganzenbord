@@ -2,8 +2,11 @@ package client;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import shared.IGame;
 
 public class LobbyScreenController {
+
+    IGame activeGame;
 
     @FXML
     public Label lblUsername;
@@ -20,6 +23,10 @@ public class LobbyScreenController {
 
         //TODO: -Server- get a game + id and put it into this label
         lblGameID.setText("1010 -test");
+    }
+
+    public void InitializeGame(){
+
     }
 
     public void btnBackOnClick(){
