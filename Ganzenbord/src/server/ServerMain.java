@@ -3,7 +3,7 @@ package server;
 import shared.Game;
 import shared.IGame;
 import shared.Player;
-import utils.IPData;
+import utils.SharedData;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -48,7 +48,7 @@ public class ServerMain {
         // Create registry at port number
         try {
             registry = LocateRegistry.createRegistry(portNumber);
-            System.out.println("Server: Registry created on IPData address :" + registry.toString());
+            System.out.println("Server: Registry created on SharedData address :" + registry.toString());
             System.out.println("Server: Registry created on port number : " + portNumber);
         } catch (RemoteException ex) {
             System.out.println("Server: Cannot create registry");
@@ -66,21 +66,21 @@ public class ServerMain {
     }
 
 
-    // Print IPData addresses and network interfaces
+    // Print SharedData addresses and network interfaces
     public static void printIPAddresses() {
         try {
             InetAddress localhost = InetAddress.getLocalHost();
-            System.out.println("Server: IPData Address: " + localhost.getHostAddress());
-            // Just in case this host has multiple IPData addresses....
+            System.out.println("Server: SharedData Address: " + localhost.getHostAddress());
+            // Just in case this host has multiple SharedData addresses....
             InetAddress[] allMyIps = InetAddress.getAllByName(localhost.getCanonicalHostName());
             if (allMyIps != null && allMyIps.length > 1) {
-                System.out.println("Server: Full list of IPData addresses:");
+                System.out.println("Server: Full list of SharedData addresses:");
                 for (InetAddress allMyIp : allMyIps) {
                     System.out.println("    " + allMyIp);
                 }
             }
         } catch (UnknownHostException ex) {
-            System.out.println("Server: Can not get IPData address of local host");
+            System.out.println("Server: Can not get SharedData address of local host");
             System.out.println("Server: UnknownHostException: " + ex.getMessage());
         }
 
@@ -99,20 +99,20 @@ public class ServerMain {
         }
     }
     public static void main(String[] args){
-        final String ipAddress = IPData.ip;
+        final String ipAddress = SharedData.ip;
 
         // Welcome message
         System.out.println("SERVER USING REGISTRY");
 
         System.out.println("[before] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
 
-        // RMI on distinct IPData address
+        // RMI on distinct SharedData address
         System.setProperty("java.rmi.server.hostname", ipAddress );
 
         System.out.println("[after] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
 
 
-        // Print IPData addresses and network interfaces
+        // Print SharedData addresses and network interfaces
         printIPAddresses();
 
         // Create server

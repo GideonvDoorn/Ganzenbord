@@ -1,7 +1,7 @@
 package login;
 
 import server.ServerMain;
-import utils.IPData;
+import utils.SharedData;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -37,7 +37,7 @@ public class LoginServer {
         // Create registry at port number
         try {
             registry = LocateRegistry.createRegistry(portNumber);
-            System.out.println("Server: Registry created on IPData address :" + registry.toString());
+            System.out.println("Server: Registry created on SharedData address :" + registry.toString());
             System.out.println("Server: Registry created on port number : " + portNumber);
         } catch (RemoteException ex) {
             System.out.println("Server: Cannot create registry");
@@ -55,20 +55,20 @@ public class LoginServer {
     }
 
     public static void main(String[] args){
-        final String ipAddress = IPData.ip;
+        final String ipAddress = SharedData.ip;
 
         // Welcome message
         System.out.println("SERVER USING REGISTRY");
 
         System.out.println("[before] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
 
-        // RMI on distinct IPData address
+        // RMI on distinct SharedData address
         System.setProperty("java.rmi.server.hostname", ipAddress );
 
         System.out.println("[after] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
 
 
-        // Print IPData addresses and network interfaces
+        // Print SharedData addresses and network interfaces
         ServerMain.printIPAddresses();
 
         // Create server

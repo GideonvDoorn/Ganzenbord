@@ -22,6 +22,7 @@ public class Game extends UnicastRemoteObject implements IGame  {
 
     private int turnNumber = 0;
     private boolean gameEnded;
+    private int turnID = 1;
 
     public boolean allPlayersMoved(){
         return host.hasMoved() && guest.hasMoved();
@@ -30,8 +31,20 @@ public class Game extends UnicastRemoteObject implements IGame  {
 
     List<IClient> users = new ArrayList<>();
 
-    public void registerUser(IClient client){
-        users.add(client);
+    public int registerUser(IClient client){
+
+        System.out.println("users: " +users.size());
+        if(users.size() > 1){
+            return 0;
+        }
+        else if(users.size() > 0){
+            users.add(client);
+            return 2;
+        }
+        else{
+            users.add(client);
+            return 1;
+        }
     }
 
     public Game(Player host, Player guest) throws RemoteException {
@@ -54,6 +67,8 @@ public class Game extends UnicastRemoteObject implements IGame  {
         startTurn();
     }
 
+
+
     public void startTurn() {
         turnNumber++;
 
@@ -75,6 +90,9 @@ public class Game extends UnicastRemoteObject implements IGame  {
         }
 
 
+        if(clientID != turnID){
+            return null;
+        }
 
         Random rndm = new Random();
 
@@ -82,42 +100,78 @@ public class Game extends UnicastRemoteObject implements IGame  {
 
         if(newIndex >= gameBoard.getTileByType(TileType.END).getTileIndex()) {
             gameEnded = true;
+
+            if(clientID == 1){
+                host.moveToTile(gameBoard.getTileByType(TileType.END));
+                for(IClient client : users){
+                    try{
+                        client.setNewState(gameBoard.getTileByType(TileType.END).getTileIndex(), guest.getCurrentTile().getTileIndex());
+
+                    }
+                    catch(RemoteException ex){
+
+                    }
+                }
+            }
+            else{
+                guest.moveToTile(gameBoard.getTileByType(TileType.END));
+                for(IClient client : users){
+                    try{
+                        client.setNewState(host.getCurrentTile().getTileIndex(), gameBoard.getTileByType(TileType.END).getTileIndex());
+
+                    }
+                    catch(RemoteException ex){
+
+                    }
+                }
+
+            }
+
+            for(IClient client : users){
+                try{
+                    client.setGameEnd(clientID);
+
+                }
+                catch(RemoteException ex){
+
+                }
+            }
             return gameBoard.getTileByType(TileType.END);
-
-
         }
 
 
         if(clientID == 1){
             host.moveToTile(gameBoard.getTileAtIndex(newIndex));
+            for(IClient client : users){
+                try{
+                    client.setNewState(host.getCurrentTile().getTileIndex(), guest.getCurrentTile().getTileIndex());
+
+                }
+                catch(RemoteException ex){
+
+                }
+            }
         }
         else{
             guest.moveToTile(gameBoard.getTileAtIndex(newIndex));
+            for(IClient client : users){
+                try{
+                    client.setNewState(host.getCurrentTile().getTileIndex(), guest.getCurrentTile().getTileIndex());
+
+                }
+                catch(RemoteException ex){
+
+                }
+            }
 
         }
-        System.out.println("Server values: " + gameBoard.getTileAtIndex(newIndex) + " - " + gameBoard.getTileAtIndex(newIndex));
 
-        //push state to all clients
-        for(IClient client : users){
-            client.setNewState(6, 6);
+        if(turnID == 1){
+            turnID++;
         }
-
-
-        //get the player a new position
-
-            //player has reached the end
-
-            //send player its new position
-//            GameLogger.logMessage(String.format("%s moved to the end tile!" , player.getName()), Level.INFO);
-//            GameLogger.logMessage(String.format("%s won!", player.getName()), Level.INFO);
-
-//
-//            player.moveToTile(gameBoard.getTileByType(TileType.END));
-
-
-
-
-//        GameLogger.logMessage(String.format("%s moved to tile %d !", player.getName(), newIndex), Level.INFO);
+        else{
+            turnID--;
+        }
 
 
 
@@ -125,14 +179,4 @@ public class Game extends UnicastRemoteObject implements IGame  {
 
 
     }
-
-//    @Override
-//    public int getGameID() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void JoinGame() {
-//
-//    }
 }
