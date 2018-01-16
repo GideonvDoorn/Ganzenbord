@@ -1,6 +1,11 @@
 package client;
 
-public interface IClient {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-    void setNewState(int player1, int player2);
+public interface IClient extends Remote {
+
+    void setNewState(int player1, int player2) throws RemoteException;
+    void setGameEnd(int playerWhoWonID) throws  RemoteException;
 }

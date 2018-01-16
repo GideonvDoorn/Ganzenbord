@@ -25,13 +25,13 @@ public class MainMenuScreenController {
 
 
         UITools.UIManager uiManager = new UITools.UIManager();
-        uiManager.loadFXML("LobbyScreen.fxml");
+        uiManager.loadFXML("MainGameScreen.fxml");
     }
 
     public void btnJoinGameOnClick(){
 
 
         UITools.UIManager uiManager = new UITools.UIManager();
-        uiManager.loadFXML("JoinGameScreen.fxml");
+        uiManager.loadFXML("MainGameScreen.fxml");
     }
 }

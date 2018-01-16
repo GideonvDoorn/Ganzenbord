@@ -3,71 +3,53 @@ package client;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import server.Tile;
-import server.TileType;
-import shared.Game;
 import shared.IGame;
 import shared.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import utils.GameLogger;
-import utils.IP;
+import utils.SharedData;
 
-import java.lang.reflect.Array;
+import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.rmi.registry.Registry;
 import java.util.List;
-import java.util.logging.Level;
 
-public class MainGameScreenController implements IClient {
+public class MainGameScreenController implements IClient, Serializable{
 
     private static final int NORMAL_STEP = 32;
+
+    int clientID;
 
     int directionState = 0;
     int directionState2 = 0;
 
+    public boolean readyToUpdate = false;
+
+
     private IGame activeGame;
     private Player player;
     private Player player2;
+    private double player1Startpos;
+    private double player2Startpos;
+
+    private int player1finalTile;
+    private int player2finalTile;
 
     @FXML
-    public Button btnRollDie;
-    public Label lblUsername;
+    public transient Button btnRollDie;
+    public transient Label lblUsername;
 
-    public Circle circlePlayer1;
-    public Circle circlePlayer2;
 
-    public Pane pnlGamePanel;
+    public transient Circle circlePlayer1;
+    public transient Circle circlePlayer2;
 
-    public Pane pnlStart;
-    public Pane pnl1;
-    public Pane pnl2;
-    public Pane pnl3;
-    public Pane pnl4;
-    public Pane pnl5;
-    public Pane pnl6;
-    public Pane pnl7;
-    public Pane pnl8;
-    public Pane pnl9;
-    public Pane pnl10;
-    public Pane pnl11;
-    public Pane pnl12;
-    public Pane pnl13;
-    public Pane pnl14;
-    public Pane pnl15;
-    public Pane pnl16;
-    public Pane pnl17;
-    public Pane pnl18;
-    public Pane pnl19;
-    public Pane pnl20;
-    public Pane pnl21;
-    public Pane pnl22;
-    public Pane pnl23;
-    public Pane pnl24;
-    public Pane pnlEnd;
+    public transient Pane pnlGamePanel;
+
+
 
     private List<Pane> panels;
+
 
 
     @FXML
@@ -75,137 +57,118 @@ public class MainGameScreenController implements IClient {
 
 
 
-
-        player = new Player("host");
-        player2 = new Player("guest");
-//        activeGame = new Game(player, player2);
-
-        panels = new ArrayList<>(Arrays.asList(pnlStart, pnl1, pnl2, pnl3, pnl4, pnl5, pnl6, pnl7, pnl8, pnl9, pnl10, pnl11, pnl12, pnl13, pnl14, pnl15, pnl16, pnl17, pnl18, pnl19, pnl20, pnl21, pnl22, pnl23, pnl24, pnlEnd));
-
         //TODO: -Database, loginserver- get current user name, and put it in this label
         UITools.UIManager uiManager = new UITools.UIManager();
 
         lblUsername.setText(UITools.loggedInUser.getUsername());
+
+        //TODO: sessies
+
     }
 
     @FXML
     public void btnConnect() {
 
-        GanzenbordClient client = new GanzenbordClient(IP.ip, 1099, this);
+        player = new Player("host");
+        player2 = new Player("guest");
 
-        activeGame = client.game;
+        player1Startpos = circlePlayer1.getCenterX();
+        player2Startpos = circlePlayer2.getCenterX();
+
+
+        try {
+            GanzenbordClient client = new GanzenbordClient(SharedData.ip, 1099, this);
+            activeGame = client.game;
+            clientID = activeGame.registerUser(client);
+
+            System.out.println(clientID);
+
+
+        } catch (RemoteException ex) {
+
+        }
+
+
+        Registry registry = null;
+
+//        try {
+//            registry = LocateRegistry.getRegistry(SharedData.ip, 1099);
+//        } catch (RemoteException ex) {
+//            System.out.println("Client: Cannot locate registry");
+//            System.out.println("Client: RemoteException: " + ex.getMessage());
+//            registry = null;
+//        }
+//
+//        try {
+//            activeGame = (IGame) registry.lookup("game");
+//        } catch (RemoteException ex) {
+//            System.out.println("Client: Cannot bind game");
+//            System.out.println("Client: RemoteException: " + ex.getMessage());
+//            activeGame = null;
+//        } catch (NotBoundException ex) {
+//            System.out.println("Client: Cannot bind game");
+//            System.out.println("Client: NotBoundException: " + ex.getMessage());
+//            activeGame = null;
+//        }
+//
+//        try{
+//            activeGame.registerUser(this);
+//        }
+//        catch (RemoteException ex){
+//            ex.printStackTrace();
+//        }
     }
 
     @FXML
     public void btnRollDieOnClick(){
 
-        //Simulate game flow
-        try{
+        try {
+
             Tile currentTile = player.getCurrentTile();
             Tile newTile = null;
 
             if(currentTile == null){
-                newTile = activeGame.startMove(0);
+                newTile = activeGame.startMove(clientID, 0);
             }
             else{
-                newTile = activeGame.startMove(currentTile.getTileIndex());
+                newTile = activeGame.startMove(clientID, player.getCurrentTile().getTileIndex());
             }
 
-            if(newTile.getType() == TileType.END){
-                GameLogger.logMessage("Player won", Level.INFO);
+            if(newTile == null){
+                return;
             }
-
             player.moveToTile(newTile);
-
-            animatePlayerToTile(newTile, currentTile, false);
-
-//            if(activeGame.getGameEnded()){
-//                return;
-//            }
-
-            if(activeGame.allPlayersMoved()){
-                activeGame.startTurn();
-            }
         }
-        catch(RemoteException ex){
+        catch(RemoteException ex) {
             ex.printStackTrace();
         }
-
+        animatePlayerToTile(player.getCurrentLoc(), player2.getCurrentLoc());
     }
 
+    @FXML
+    public void btnMove() {
 
-    private void animatePlayerToTile(Tile tileToMoveTo, Tile currentTile, boolean player2){
+        animatePlayerToTile(player.getCurrentLoc(), player2.getCurrentLoc());
+    }
 
-        int currentIteratorIndex = 0;
-        if(currentTile == null){
+    public void animatePlayerToTile(int tilePlayer1, int tilePlayer2){
 
+        circlePlayer1.setCenterX(player1Startpos + (tilePlayer1 * NORMAL_STEP));
+        circlePlayer2.setCenterX(player2Startpos + (tilePlayer2 * NORMAL_STEP));
+
+        System.out.println("Circles should have moved!-");
+    }
+
+    public void setGameEnd(int playerWhoWonID){
+        if(playerWhoWonID == clientID){
+            System.out.println("Player won");
         }
         else{
-            currentIteratorIndex = currentTile.getTileIndex();
-        }
+            System.out.println("Player lost");
 
-        if(!player2){
-
-            for(int i = 0; i < tileToMoveTo.getTileIndex() - currentIteratorIndex; i++){
-
-
-
-                if(currentIteratorIndex == 10){
-                    directionState = 1;
-                }
-
-                if(currentIteratorIndex == 15){
-                    directionState = 2;
-                }
-                if(directionState == 0){
-                    circlePlayer1.setCenterX(circlePlayer1.getCenterX() + NORMAL_STEP);
-                }
-                else if(directionState == 1){
-                    circlePlayer1.setCenterY(circlePlayer1.getCenterY() + NORMAL_STEP * -1);
-                }
-                else if(directionState == 2){
-                    circlePlayer1.setCenterX(circlePlayer1.getCenterX() + NORMAL_STEP * -1);
-                }
-                currentIteratorIndex++;
-
-            }
-        }
-        else{
-
-            for(int i = 0; i < tileToMoveTo.getTileIndex() - currentTile.getTileIndex(); i++){
-
-                if(currentIteratorIndex == 9){
-                    circlePlayer2.setCenterX(circlePlayer2.getCenterX() + NORMAL_STEP);
-
-                }
-                if(currentIteratorIndex == 10){
-                    directionState2 = 1;
-                    circlePlayer2.setCenterY(circlePlayer2.getCenterY() + NORMAL_STEP * -1);
-
-                }
-                if(currentIteratorIndex == 14){
-                    circlePlayer2.setCenterY(circlePlayer2.getCenterY() + NORMAL_STEP * -1);
-
-                }
-                if(currentIteratorIndex == 15){
-                    directionState2 = 2;
-                    circlePlayer2.setCenterX(circlePlayer2.getCenterX() + NORMAL_STEP * -1);
-
-                }
-
-                if(directionState2 == 0){
-                    circlePlayer2.setCenterX(circlePlayer2.getCenterX() + NORMAL_STEP);
-                }
-                else if(directionState2 == 1){
-                    circlePlayer2.setCenterY(circlePlayer2.getCenterY() + NORMAL_STEP * -1);
-                }
-                else if(directionState2 == 2){
-                    circlePlayer2.setCenterX(circlePlayer2.getCenterX() + NORMAL_STEP * -1);
-                }
-                currentIteratorIndex++;
-            }
         }
     }
+
 
     public void btnQuitOnClick(){
         //TODO: -Database, loginserver- logout user
@@ -216,5 +179,9 @@ public class MainGameScreenController implements IClient {
     @Override
     public void setNewState(int player1, int player2) {
 
+        this.player.setCurrentLoc(player1);
+        this.player2.setCurrentLoc(player2);
+
+        System.out.println("STATE PUSHED");
     }
 }

@@ -223,6 +223,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/client/test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/login/ILoginManager.java">
           <value>
             <set />
@@ -324,6 +329,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/utils/IP.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/utils/IPData.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/utils/SharedData.java">
           <value>
             <set />
           </value>
