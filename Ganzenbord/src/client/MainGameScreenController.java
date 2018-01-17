@@ -15,17 +15,14 @@ import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.util.List;
 
-public class MainGameScreenController implements IClient, Serializable{
+public class MainGameScreenController implements Serializable{
 
     private static final int NORMAL_STEP = 32;
 
+    private IClient client;
+
+
     int clientID;
-
-    int directionState = 0;
-    int directionState2 = 0;
-
-    public boolean readyToUpdate = false;
-
 
     private IGame activeGame;
     private Player player;
@@ -66,6 +63,11 @@ public class MainGameScreenController implements IClient, Serializable{
 
     }
 
+    public void setClient(IClient client){
+        this.client = client;
+    }
+
+
     @FXML
     public void btnConnect() {
 
@@ -76,17 +78,17 @@ public class MainGameScreenController implements IClient, Serializable{
         player2Startpos = circlePlayer2.getCenterX();
 
 
-        try {
-            GanzenbordClient client = new GanzenbordClient(SharedData.ip, 1099, this);
-            activeGame = client.game;
-            clientID = activeGame.registerUser(client);
-
-            System.out.println(clientID);
-
-
-        } catch (RemoteException ex) {
-
-        }
+//        try {
+//            GanzenbordClient client = new GanzenbordClient(SharedData.ip, 1099, this);
+//            activeGame = client.gameServer;
+//            clientID = activeGame.registerUser(client);
+//
+//            System.out.println(clientID);
+//
+//
+//        } catch (RemoteException ex) {
+//            ex.printStackTrace();
+//        }
 
 
         Registry registry = null;
@@ -176,11 +178,10 @@ public class MainGameScreenController implements IClient, Serializable{
         uiManager.loadFXML("MainMenuScreen.fxml");
     }
 
-    @Override
-    public void setNewState(int player1, int player2) {
+    public void setNewState(int newLocationPlayer1, int newLocationPlayer2) {
 
-        this.player.setCurrentLoc(player1);
-        this.player2.setCurrentLoc(player2);
+        this.player.setCurrentLoc(newLocationPlayer1);
+        this.player2.setCurrentLoc(newLocationPlayer2);
 
         System.out.println("STATE PUSHED");
     }

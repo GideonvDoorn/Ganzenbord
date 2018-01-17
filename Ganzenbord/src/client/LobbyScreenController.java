@@ -1,10 +1,18 @@
 package client;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import shared.IGame;
+import utils.SharedData;
+
+import java.rmi.RemoteException;
 
 public class LobbyScreenController {
 
+    boolean createGame = false;
+
+    private IClient client;
     @FXML
     public Label lblUsername;
     public Label lblGameID;
@@ -13,13 +21,57 @@ public class LobbyScreenController {
 
     @FXML
     public void initialize() {
-        //TODO: -Database, loginserver- get current user name, and put it in this label
+
+
+
         lblUsername.setText(UITools.loggedInUser.getUsername());
-        lblPlayer1.setText(UITools.loggedInUser.getUsername());
+//        if(createGame){
+//            System.out.println("create game");
+//            //set username in lobbyscreen
+//            lblPlayer1.setText(UITools.loggedInUser.getUsername());
+//
+//            createGame();
+//        }
+
+    }
+
+    public void setCreateGame(){
+        createGame = true;
+    }
+
+    public void createGame(){
 
 
-        //TODO: -Server- get a game + id and put it into this label
-        lblGameID.setText("1010 -test");
+        try {
+
+            //connect to server and host a game
+            GanzenbordClient client = new GanzenbordClient();
+
+            client.connectToServer(SharedData.ip, 1099);
+            client.setLobbyController(this);
+            lblGameID.setText(String.valueOf(client.gameServer.hostGame(client)));
+
+            //set username in lobbyscreen
+            lblPlayer1.setText(UITools.loggedInUser.getUsername());
+
+//            clientID = activeGame.registerUser(client);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void joinLobby(IClient client){
+        this.client = client;
+
+
+        try{
+            client.setLobbyController(this);
+            client.requestUsernamePush();
+        }
+        catch (RemoteException ex){
+           ex.printStackTrace();
+        }
+
     }
 
     public void btnBackOnClick(){
@@ -36,5 +88,15 @@ public class LobbyScreenController {
     public void btnStartGameOnclick(){
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("MainGameScreen.fxml");
+    }
+
+    public void setUsernames(String host, String guest){
+
+        if(!host.equals("")){
+            Platform.runLater(() -> lblPlayer1.setText(host));
+        }
+        if(!guest.equals("")){
+            Platform.runLater(() -> lblPlayer2.setText(guest));
+        }
     }
 }

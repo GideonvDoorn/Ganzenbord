@@ -29,7 +29,7 @@ public class RegisterScreenController {
 
     public void btnRegisterOnClick(){
 
-        LoginClient loginClient = new LoginClient(SharedData.ip, 1099);
+        LoginClient loginClient = new LoginClient(SharedData.ip, 1100);
         ILoginManager loginManager = loginClient.loginManager;
 
         if(loginManager == null){

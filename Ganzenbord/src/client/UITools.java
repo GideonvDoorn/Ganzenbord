@@ -29,15 +29,92 @@ public class UITools {
          */
         private static Pane currentRoot = null;
         /**
-         * The FXMLLoader used to load all FXML Files. This is also used to get the current controller.
+         * The FXMLLoader used to load all FXML Files. This is also used to get the current gameScreenController.
          */
         private FXMLLoader loader = null;
+
+
+        public void loadMainGameScreen(){
+            loader = new FXMLLoader(getClass().getResource("LobbyScreen.fxml"));
+            Pane root  = null;
+            try{
+                root = loader.load();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            currentRoot = root;
+
+            Scene scene = new Scene(root);
+            LobbyScreenController controller = loader.<LobbyScreenController>getController();
+            controller.createGame();
+            if(stage == null){
+                stage = new Stage();
+                stage.setTitle("");
+                stage.setScene(scene);
+                stage.show();
+                stage.setResizable(false);
+            }
+            stage.setScene(scene);
+        }
+
+
+        public void loadLobbyScreenAsHost(){
+            loader = new FXMLLoader(getClass().getResource("LobbyScreen.fxml"));
+            Pane root  = null;
+            try{
+                root = loader.load();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            currentRoot = root;
+
+            Scene scene = new Scene(root);
+            LobbyScreenController controller = loader.<LobbyScreenController>getController();
+            controller.createGame();
+            if(stage == null){
+                stage = new Stage();
+                stage.setTitle("");
+                stage.setScene(scene);
+                stage.show();
+                stage.setResizable(false);
+            }
+            stage.setScene(scene);
+        }
+
+        public void loadLobbyScreenAsClient(IClient client){
+            loader = new FXMLLoader(getClass().getResource("LobbyScreen.fxml"));
+            Pane root  = null;
+            try{
+                root = loader.load();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            currentRoot = root;
+            LobbyScreenController controller = loader.<LobbyScreenController>getController();
+            controller.joinLobby(client);
+            Scene scene = new Scene(root);
+            if(stage == null){
+                stage = new Stage();
+                stage.setTitle("");
+                stage.setScene(scene);
+                stage.show();
+                stage.setResizable(false);
+            }
+            stage.setScene(scene);
+        }
+
+
+
 
         /**
          * Loads the next FXML into the current BorderPane.
          *
          * @param resource   The FXML FileName that needs to be loader
          */
+
         public void loadFXML(String resource){
             loader = new FXMLLoader(getClass().getResource(resource));
             Pane root  = null;
@@ -62,7 +139,7 @@ public class UITools {
 
 
         /**
-         * Returns the current controller from the FXMLLoader.
+         * Returns the current gameScreenController from the FXMLLoader.
          *
          * @return the Controller as an Object. Needs to be cast to the right class.
          */
