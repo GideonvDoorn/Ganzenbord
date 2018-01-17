@@ -1,6 +1,7 @@
 package client;
 
 import server.IGameServer;
+import server.Tile;
 
 import java.io.Serializable;
 import java.rmi.NotBoundException;
@@ -12,20 +13,21 @@ import java.rmi.server.UnicastRemoteObject;
 public class GanzenbordClient extends UnicastRemoteObject implements IClient, Serializable {
 
     private int clientID;
+    private boolean isHost;
 
-    // Set binding name for Effectenbeurs
+    // Set binding name for server
     private static final String bindingName = "server";
 
-    // References to registry and game
+    // References to registry and server
     private Registry registry = null;
     public IGameServer gameServer = null;
 
-    LobbyScreenController lobbyController;
-    MainGameScreenController gameScreenController;
+    private LobbyScreenController lobbyController;
+    private MainGameScreenController gameScreenController;
 
     // Constructor
-    public GanzenbordClient() throws RemoteException {
-
+    public GanzenbordClient(boolean isHost) throws RemoteException {
+        this.isHost = isHost;
     }
 
 
@@ -98,18 +100,18 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     }
 
     @Override
-    public void hostGame() {
+    public int hostGame() {
         if(gameServer == null){
-            return;
+            return -1;
         }
 
         try{
-            gameServer.hostGame(this);
+            return gameServer.hostGame(this);
         }
         catch(RemoteException ex){
             ex.printStackTrace();
+            return -1;
         }
-
     }
 
     @Override
@@ -128,9 +130,9 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     }
 
     @Override
-    public void setNewState(int newLocationPlayer1, int newLocationPlayer2) {
+    public void pushNewState(int newLocationPlayer1, int newLocationPlayer2) {
         System.out.println("Client values: " + newLocationPlayer1 + " - " + newLocationPlayer2);
-        gameScreenController.setNewState(newLocationPlayer1, newLocationPlayer2);
+//        gameScreenController.setNewState(newLocationPlayer1, newLocationPlayer2);
         gameScreenController.animatePlayerToTile(newLocationPlayer1, newLocationPlayer2);
     }
 
@@ -143,11 +145,23 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
     @Override
     public void setGameEnd(int playerWhoWonID) {
-gameScreenController.setGameEnd(playerWhoWonID);
+        gameScreenController.setGameEnd(playerWhoWonID);
     }
 
     @Override
     public void requestUsernamePush() throws RemoteException {
         gameServer.pushLobbyUsernames();
+    }
+
+    @Override
+    public Tile rollDice(IClient client, int currentLocation) throws RemoteException {
+
+        gameServer.rollDice(this, currentLocation);
+        return null;
+    }
+
+    @Override
+    public boolean isHost() {
+        return isHost;
     }
 }

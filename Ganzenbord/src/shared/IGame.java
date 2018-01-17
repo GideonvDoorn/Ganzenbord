@@ -12,7 +12,7 @@ public interface IGame extends Remote {
     IClient getGuest() throws RemoteException;
     boolean allPlayersMoved() throws RemoteException;
     void startTurn() throws RemoteException;
-    Tile rollDice(IClient client, int currentTile) throws RemoteException;
+    int rollDice(IClient client, int currentTile) throws RemoteException;
     void registerUser(IClient client) throws RemoteException;
     int getRoomCode()throws RemoteException;
 

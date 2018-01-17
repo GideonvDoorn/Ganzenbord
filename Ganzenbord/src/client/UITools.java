@@ -34,8 +34,8 @@ public class UITools {
         private FXMLLoader loader = null;
 
 
-        public void loadMainGameScreen(){
-            loader = new FXMLLoader(getClass().getResource("LobbyScreen.fxml"));
+        public void loadMainGameScreen(IClient client){
+            loader = new FXMLLoader(getClass().getResource("MainGameScreen.fxml"));
             Pane root  = null;
             try{
                 root = loader.load();
@@ -46,8 +46,8 @@ public class UITools {
             currentRoot = root;
 
             Scene scene = new Scene(root);
-            LobbyScreenController controller = loader.<LobbyScreenController>getController();
-            controller.createGame();
+            MainGameScreenController controller = loader.<MainGameScreenController>getController();
+            controller.setClient(client);
             if(stage == null){
                 stage = new Stage();
                 stage.setTitle("");

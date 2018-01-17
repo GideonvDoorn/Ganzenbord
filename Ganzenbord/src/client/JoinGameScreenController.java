@@ -35,7 +35,7 @@ public class JoinGameScreenController {
 
         //connect to server and join a game
         try{
-            client = new GanzenbordClient();
+            client = new GanzenbordClient(false);
             client.connectToServer(SharedData.ip, 1099);
             client.joinGame(Integer.parseInt(tfGameCode.getText()));
         }

@@ -3,7 +3,6 @@ package server;
 import client.IClient;
 import shared.Game;
 import shared.IGame;
-import shared.Player;
 import utils.SharedData;
 
 import java.io.Serializable;
@@ -11,7 +10,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -197,7 +195,21 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
     }
 
     @Override
-    public int rollDice(boolean host) throws RemoteException {
-        activeGame.startMove()
+    public void rollDice(IClient client, int currentLocation) throws RemoteException {
+        int newLocation = activeGame.rollDice(client, currentLocation);
+
+        if(newLocation == -1){
+            return;
+        }
+
+        //RMI PUSH: push state to all clients, locations that don't have to change are -1
+        if(client.isHost()){
+            activeGame.getHost().pushNewState(newLocation, -1);
+            activeGame.getGuest().pushNewState(newLocation, -1);
+        }
+        else{
+            activeGame.getHost().pushNewState(-1, newLocation);
+            activeGame.getGuest().pushNewState(-1, newLocation);
+        }
     }
 }

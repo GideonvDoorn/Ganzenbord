@@ -6,18 +6,17 @@ import javafx.scene.control.Label;
 import shared.IGame;
 import utils.SharedData;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public class LobbyScreenController {
-
-    boolean createGame = false;
+public class LobbyScreenController implements Serializable {
 
     private IClient client;
     @FXML
-    public Label lblUsername;
-    public Label lblGameID;
-    public Label lblPlayer1;
-    public Label lblPlayer2;
+    public transient Label lblUsername;
+    public transient Label lblGameID;
+    public transient Label lblPlayer1;
+    public transient Label lblPlayer2;
 
     @FXML
     public void initialize() {
@@ -25,19 +24,9 @@ public class LobbyScreenController {
 
 
         lblUsername.setText(UITools.loggedInUser.getUsername());
-//        if(createGame){
-//            System.out.println("create game");
-//            //set username in lobbyscreen
-//            lblPlayer1.setText(UITools.loggedInUser.getUsername());
-//
-//            createGame();
-//        }
 
     }
 
-    public void setCreateGame(){
-        createGame = true;
-    }
 
     public void createGame(){
 
@@ -45,11 +34,11 @@ public class LobbyScreenController {
         try {
 
             //connect to server and host a game
-            GanzenbordClient client = new GanzenbordClient();
+            client = new GanzenbordClient(true);
 
             client.connectToServer(SharedData.ip, 1099);
             client.setLobbyController(this);
-            lblGameID.setText(String.valueOf(client.gameServer.hostGame(client)));
+            lblGameID.setText(String.valueOf(client.hostGame()));
 
             //set username in lobbyscreen
             lblPlayer1.setText(UITools.loggedInUser.getUsername());
@@ -87,7 +76,7 @@ public class LobbyScreenController {
 
     public void btnStartGameOnclick(){
         UITools.UIManager uiManager = new UITools.UIManager();
-        uiManager.loadFXML("MainGameScreen.fxml");
+        uiManager.loadMainGameScreen(client);
     }
 
     public void setUsernames(String host, String guest){

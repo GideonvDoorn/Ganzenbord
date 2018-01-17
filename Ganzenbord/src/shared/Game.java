@@ -19,6 +19,7 @@ public class Game extends UnicastRemoteObject implements IGame  {
 
     private IClient host;
     private IClient guest;
+    private boolean hostTurn = true;
 
     private Board gameBoard;
 
@@ -104,8 +105,26 @@ public class Game extends UnicastRemoteObject implements IGame  {
         return  gameEnded;
     }
 
-    public Tile rollDice(IClient client, int currentTile) {
-        return null;
+    public int rollDice(IClient client, int currentTile) {
+
+        try{
+            if(client.isHost() && !hostTurn){
+                return -1;
+            }
+            else if(!client.isHost() && hostTurn){
+                return -1;
+            }
+        }
+
+        catch(RemoteException ex){
+            ex.printStackTrace();
+        }
+
+        //flip turns
+        hostTurn = !hostTurn;
+
+        Random random = new Random();
+        return  currentTile + ( 1 + random.nextInt(6));
 
 
 
@@ -130,7 +149,7 @@ public class Game extends UnicastRemoteObject implements IGame  {
 //                host.moveToTile(gameBoard.getTileByType(TileType.END));
 //                for(IClient client : users){
 //                    try{
-//                        client.setNewState(gameBoard.getTileByType(TileType.END).getTileIndex(), guest.getCurrentTile().getTileIndex());
+//                        client.pushNewState(gameBoard.getTileByType(TileType.END).getTileIndex(), guest.getCurrentTile().getTileIndex());
 //
 //                    }
 //                    catch(RemoteException ex){
@@ -142,7 +161,7 @@ public class Game extends UnicastRemoteObject implements IGame  {
 //                guest.moveToTile(gameBoard.getTileByType(TileType.END));
 //                for(IClient client : users){
 //                    try{
-//                        client.setNewState(host.getCurrentTile().getTileIndex(), gameBoard.getTileByType(TileType.END).getTileIndex());
+//                        client.pushNewState(host.getCurrentTile().getTileIndex(), gameBoard.getTileByType(TileType.END).getTileIndex());
 //
 //                    }
 //                    catch(RemoteException ex){
@@ -169,7 +188,7 @@ public class Game extends UnicastRemoteObject implements IGame  {
 //            host.moveToTile(gameBoard.getTileAtIndex(newIndex));
 //            for(IClient client : users){
 //                try{
-//                    client.setNewState(host.getCurrentTile().getTileIndex(), guest.getCurrentTile().getTileIndex());
+//                    client.pushNewState(host.getCurrentTile().getTileIndex(), guest.getCurrentTile().getTileIndex());
 //
 //                }
 //                catch(RemoteException ex){
@@ -181,7 +200,7 @@ public class Game extends UnicastRemoteObject implements IGame  {
 //            guest.moveToTile(gameBoard.getTileAtIndex(newIndex));
 //            for(IClient client : users){
 //                try{
-//                    client.setNewState(host.getCurrentTile().getTileIndex(), guest.getCurrentTile().getTileIndex());
+//                    client.pushNewState(host.getCurrentTile().getTileIndex(), guest.getCurrentTile().getTileIndex());
 //
 //                }
 //                catch(RemoteException ex){

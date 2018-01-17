@@ -59,18 +59,6 @@ public class MainGameScreenController implements Serializable{
 
         lblUsername.setText(UITools.loggedInUser.getUsername());
 
-        //TODO: sessies
-
-    }
-
-    public void setClient(IClient client){
-        this.client = client;
-    }
-
-
-    @FXML
-    public void btnConnect() {
-
         player = new Player("host");
         player2 = new Player("guest");
 
@@ -78,47 +66,25 @@ public class MainGameScreenController implements Serializable{
         player2Startpos = circlePlayer2.getCenterX();
 
 
-//        try {
-//            GanzenbordClient client = new GanzenbordClient(SharedData.ip, 1099, this);
-//            activeGame = client.gameServer;
-//            clientID = activeGame.registerUser(client);
-//
-//            System.out.println(clientID);
-//
-//
-//        } catch (RemoteException ex) {
-//            ex.printStackTrace();
-//        }
+    }
+
+    public void setClient(IClient client){
+        this.client = client;
+
+        try{
+            client.setGameScreenController(this);
+
+        }
+        catch(RemoteException ex){
+            ex.printStackTrace();
+        }
+    }
 
 
-        Registry registry = null;
+    @FXML
+    public void btnConnect() {
 
-//        try {
-//            registry = LocateRegistry.getRegistry(SharedData.ip, 1099);
-//        } catch (RemoteException ex) {
-//            System.out.println("Client: Cannot locate registry");
-//            System.out.println("Client: RemoteException: " + ex.getMessage());
-//            registry = null;
-//        }
-//
-//        try {
-//            activeGame = (IGame) registry.lookup("game");
-//        } catch (RemoteException ex) {
-//            System.out.println("Client: Cannot bind game");
-//            System.out.println("Client: RemoteException: " + ex.getMessage());
-//            activeGame = null;
-//        } catch (NotBoundException ex) {
-//            System.out.println("Client: Cannot bind game");
-//            System.out.println("Client: NotBoundException: " + ex.getMessage());
-//            activeGame = null;
-//        }
-//
-//        try{
-//            activeGame.registerUser(this);
-//        }
-//        catch (RemoteException ex){
-//            ex.printStackTrace();
-//        }
+
     }
 
     @FXML
@@ -126,20 +92,14 @@ public class MainGameScreenController implements Serializable{
 
         try {
 
-            Tile currentTile = player.getCurrentTile();
-            Tile newTile = null;
-
-            if(currentTile == null){
-                newTile = activeGame.startMove(clientID, 0);
+            if(client.isHost()){
+                client.rollDice(client, player.getCurrentLoc());
             }
             else{
-                newTile = activeGame.startMove(clientID, player.getCurrentTile().getTileIndex());
+                client.rollDice(client, player2.getCurrentLoc());
             }
 
-            if(newTile == null){
-                return;
-            }
-            player.moveToTile(newTile);
+
         }
         catch(RemoteException ex) {
             ex.printStackTrace();
@@ -154,9 +114,15 @@ public class MainGameScreenController implements Serializable{
     }
 
     public void animatePlayerToTile(int tilePlayer1, int tilePlayer2){
+        if(tilePlayer1 != -1){
+            circlePlayer1.setCenterX(player1Startpos + (tilePlayer1 * NORMAL_STEP));
+            this.player.setCurrentLoc(tilePlayer1);
 
-        circlePlayer1.setCenterX(player1Startpos + (tilePlayer1 * NORMAL_STEP));
-        circlePlayer2.setCenterX(player2Startpos + (tilePlayer2 * NORMAL_STEP));
+        }
+        if(tilePlayer2 != -1){
+            circlePlayer2.setCenterX(player2Startpos + (tilePlayer2 * NORMAL_STEP));
+            this.player2.setCurrentLoc(tilePlayer2);
+        }
 
         System.out.println("Circles should have moved!-");
     }
@@ -179,9 +145,15 @@ public class MainGameScreenController implements Serializable{
     }
 
     public void setNewState(int newLocationPlayer1, int newLocationPlayer2) {
+//
+//        if(newLocationPlayer1 != -1){
+//            this.player.setCurrentLoc(newLocationPlayer1);
+//
+//        }
+//        if(newLocationPlayer2 != -1){
+//            this.player2.setCurrentLoc(newLocationPlayer2);
+//        }
 
-        this.player.setCurrentLoc(newLocationPlayer1);
-        this.player2.setCurrentLoc(newLocationPlayer2);
 
         System.out.println("STATE PUSHED");
     }
