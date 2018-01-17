@@ -22,10 +22,8 @@ public class MainMenuScreenController {
     }
 
     public void btnStartGameOnClick(){
-
-
         UITools.UIManager uiManager = new UITools.UIManager();
-        uiManager.loadFXML("LobbyScreen.fxml");
+        uiManager.loadLobbyScreenAsHost();
     }
 
     public void btnJoinGameOnClick(){

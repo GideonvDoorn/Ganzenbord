@@ -1,29 +1,44 @@
 package client;
 
-import shared.IGame;
+import server.IGameServer;
+import server.Tile;
 
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
-public class GanzenbordClient implements IClient {
+public class GanzenbordClient extends UnicastRemoteObject implements IClient, Serializable {
 
-    // Set binding name for Effectenbeurs
-    private static final String bindingName = "game";
+    private int clientID;
+    private boolean isHost;
 
-    // References to registry and Effectenbeurs
+    // Set binding name for server
+    private static final String bindingName = "server";
+
+    // References to registry and server
     private Registry registry = null;
-    public IGame game = null;
+    public IGameServer gameServer = null;
+
+    private LobbyScreenController lobbyController;
+    private MainGameScreenController gameScreenController;
 
     // Constructor
-    public GanzenbordClient(String ipAddress, int portNumber, MainGameScreenController controller) {
+    public GanzenbordClient(boolean isHost) throws RemoteException {
+        this.isHost = isHost;
+    }
 
-        // Print IP address and port number for registry
-        System.out.println("Client: IP Address: " + ipAddress);
+
+    @Override
+    public void connectToServer(String ipAddress, int portNumber) {
+
+        // Print SharedData address and port number for registry
+        System.out.println("Client: SharedData Address: " + ipAddress);
         System.out.println("Client: Port number " + portNumber);
 
-        // Locate registry at IP address and port number
+        // Locate registry at SharedData address and port number
         try {
             registry = LocateRegistry.getRegistry(ipAddress, portNumber);
         } catch (RemoteException ex) {
@@ -41,23 +56,23 @@ public class GanzenbordClient implements IClient {
         }
 
 
-        // Bind Effectenbeurs using registry
+        // Bind game using registry
         if (registry != null) {
             try {
-                game = (IGame) registry.lookup(bindingName);
+                gameServer = (IGameServer) registry.lookup(bindingName);
             } catch (RemoteException ex) {
                 System.out.println("Client: Cannot bind game");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
-                game = null;
+                gameServer = null;
             } catch (NotBoundException ex) {
                 System.out.println("Client: Cannot bind game");
                 System.out.println("Client: NotBoundException: " + ex.getMessage());
-                game = null;
+                gameServer = null;
             }
         }
 
         // Print result binding Effectenbeurs
-        if (game != null) {
+        if (gameServer != null) {
             System.out.println("Client: game bound");
         } else {
             System.out.println("Client: game is null pointer");
@@ -65,7 +80,88 @@ public class GanzenbordClient implements IClient {
     }
 
     @Override
-    public void setNewState(int player1, int player2) {
+    public void setGameScreenController(MainGameScreenController ctrl) {
+        this.gameScreenController = ctrl;
+    }
 
+    @Override
+    public void setLobbyController(LobbyScreenController ctrl) throws RemoteException {
+        this.lobbyController = ctrl;
+    }
+
+    @Override
+    public int getClientID() {
+        return 0;
+    }
+
+    @Override
+    public String getUsername() throws RemoteException {
+        return UITools.loggedInUser.getUsername();
+    }
+
+    @Override
+    public int hostGame() {
+        if(gameServer == null){
+            return -1;
+        }
+
+        try{
+            return gameServer.hostGame(this);
+        }
+        catch(RemoteException ex){
+            ex.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public void joinGame(int roomCode) {
+        if(gameServer == null){
+            return;
+        }
+
+        try{
+            gameServer.joinGame(roomCode, this);
+        }
+        catch(RemoteException ex){
+            ex.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void pushNewState(int newLocationPlayer1, int newLocationPlayer2) {
+        System.out.println("Client values: " + newLocationPlayer1 + " - " + newLocationPlayer2);
+//        gameScreenController.setNewState(newLocationPlayer1, newLocationPlayer2);
+        gameScreenController.animatePlayerToTile(newLocationPlayer1, newLocationPlayer2);
+    }
+
+
+    @Override
+    public void setUsernames(String host, String guest) {
+        lobbyController.setUsernames(host, guest);
+    }
+
+
+    @Override
+    public void setGameEnd(int playerWhoWonID) {
+        gameScreenController.setGameEnd(playerWhoWonID);
+    }
+
+    @Override
+    public void requestUsernamePush() throws RemoteException {
+        gameServer.pushLobbyUsernames();
+    }
+
+    @Override
+    public Tile rollDice(IClient client, int currentLocation) throws RemoteException {
+
+        gameServer.rollDice(this, currentLocation);
+        return null;
+    }
+
+    @Override
+    public boolean isHost() {
+        return isHost;
     }
 }
