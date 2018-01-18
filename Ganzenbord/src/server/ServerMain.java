@@ -19,10 +19,10 @@ import java.util.*;
 public class ServerMain extends UnicastRemoteObject implements IGameServer, Serializable{
 
     // Set port number
-    private static final int portNumber = 1099;
+    private static final int PORT_NUMBER = 1099;
 
-    // Set binding name for Effectenbeurs
-    private static final String bindingName = "server";
+    // Set binding name for server
+    private static final String BINDING_NAME = "server";
 
     // References to registry and game
     private Registry registry = null;
@@ -32,24 +32,13 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
 
     public ServerMain() throws RemoteException{
         // Print port number for registry
-        System.out.println("Server: Port number " + portNumber);
-
-//        //create a game todo: test, this shouldnt happen here
-//        try {
-//            game = new Game(new Player("host"), new Player("guest"));
-//
-//            System.out.println("Server: Game created");
-//        } catch (RemoteException ex) {
-//            System.out.println("Server: Cannot create Game");
-//            System.out.println("Server: RemoteException: " + ex.getMessage());
-//            game = null;
-//        }
+        System.out.println("Server: Port number " + PORT_NUMBER);
 
         // Create registry at port number
         try {
-            registry = LocateRegistry.createRegistry(portNumber);
+            registry = LocateRegistry.createRegistry(PORT_NUMBER);
             System.out.println("Server: Registry created on SharedData address :" + registry.toString());
-            System.out.println("Server: Registry created on port number : " + portNumber);
+            System.out.println("Server: Registry created on port number : " + PORT_NUMBER);
         } catch (RemoteException ex) {
             System.out.println("Server: Cannot create registry");
             System.out.println("Server: RemoteException: " + ex.getMessage());
@@ -58,7 +47,7 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
 
         // Bind game using registry
         try {
-            registry.rebind(bindingName, this);
+            registry.rebind(BINDING_NAME, this);
         } catch (RemoteException ex) {
             System.out.println("Server: Cannot bind game");
             System.out.println("Server: RemoteException: " + ex.getMessage());
@@ -152,26 +141,23 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
     }
 
     @Override
-    public void joinGame(int roomCode, IClient client) {
+    public boolean joinGame(int roomCode, IClient client) {
 
         try{
             if(activeGame == null || activeGame.getHost() == null){
-                return;
+                return false;
             }
 
             if(activeGame.getRoomCode() == roomCode){
 
                 activeGame.registerUser(client);
-
-
-
-
+                return true;
             }
-            return;
+            return false;
         }
         catch (RemoteException ex){
             ex.printStackTrace();
-            return;
+            return false;
         }
 
     }
@@ -184,15 +170,28 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
         }
 
         try{
-
-            activeGame.getGuest().setUsernames(activeGame.getHost().getUsername(), activeGame.getGuest().getUsername());
-            activeGame.getHost().setUsernames(activeGame.getHost().getUsername(), activeGame.getGuest().getUsername());
+            if(activeGame.getGuest() == null){
+                activeGame.getHost().setUsernames(activeGame.getHost().getUsername(), " ");
+            }
+            else{
+                activeGame.getHost().setUsernames(activeGame.getHost().getUsername(), activeGame.getGuest().getUsername());
+                activeGame.getGuest().setUsernames(activeGame.getHost().getUsername(), activeGame.getGuest().getUsername());
+            }
         }
         catch (RemoteException ex){
             ex.printStackTrace();
         }
-
     }
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void rollDice(IClient client, int currentLocation) throws RemoteException {
@@ -211,5 +210,44 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
             activeGame.getHost().pushNewState(-1, newLocation);
             activeGame.getGuest().pushNewState(-1, newLocation);
         }
+    }
+
+    @Override
+    public boolean checkIfGameIsFull() {
+        try {
+            return activeGame.checkIfGameIsFull();
+        }
+        catch (RemoteException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public void leaveGame(IClient client, boolean inLobby) {
+        try {
+            activeGame.unRegisterUser(client);
+
+            if(inLobby){
+                activeGame.getHost().requestUsernamePush();
+            }
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void terminateGame() throws RemoteException {
+        activeGame.getHost().pushTerminateGame();
+
+        if(activeGame.getGuest() != null){
+            activeGame.getGuest().pushTerminateGame();
+        }
+    }
+
+    @Override
+    public void startGame() throws RemoteException {
+        activeGame.getHost().pushStartGame();
+        activeGame.getGuest().pushStartGame();
     }
 }

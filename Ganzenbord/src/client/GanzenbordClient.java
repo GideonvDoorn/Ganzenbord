@@ -1,7 +1,7 @@
 package client;
 
 import server.IGameServer;
-import server.Tile;
+import utils.SharedData;
 
 import java.io.Serializable;
 import java.rmi.NotBoundException;
@@ -12,16 +12,17 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class GanzenbordClient extends UnicastRemoteObject implements IClient, Serializable {
 
-    private int clientID;
-    private boolean isHost;
+
 
     // Set binding name for server
-    private static final String bindingName = "server";
+    private static final String BINDING_NAME = "server";
 
     // References to registry and server
     private Registry registry = null;
-    public IGameServer gameServer = null;
+    private IGameServer gameServer = null;
 
+
+    private boolean isHost;
     private LobbyScreenController lobbyController;
     private MainGameScreenController gameScreenController;
 
@@ -34,6 +35,9 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     @Override
     public void connectToServer(String ipAddress, int portNumber) {
 
+        if(gameServer != null){
+            return;
+        }
         // Print SharedData address and port number for registry
         System.out.println("Client: SharedData Address: " + ipAddress);
         System.out.println("Client: Port number " + portNumber);
@@ -59,7 +63,7 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
         // Bind game using registry
         if (registry != null) {
             try {
-                gameServer = (IGameServer) registry.lookup(bindingName);
+                gameServer = (IGameServer) registry.lookup(BINDING_NAME);
             } catch (RemoteException ex) {
                 System.out.println("Client: Cannot bind game");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
@@ -90,11 +94,6 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     }
 
     @Override
-    public int getClientID() {
-        return 0;
-    }
-
-    @Override
     public String getUsername() throws RemoteException {
         return UITools.loggedInUser.getUsername();
     }
@@ -115,16 +114,17 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     }
 
     @Override
-    public void joinGame(int roomCode) {
+    public boolean joinGame(int roomCode) {
         if(gameServer == null){
-            return;
+            return false;
         }
 
         try{
-            gameServer.joinGame(roomCode, this);
+            return gameServer.joinGame(roomCode, this);
         }
         catch(RemoteException ex){
             ex.printStackTrace();
+            return false;
         }
 
     }
@@ -132,7 +132,6 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     @Override
     public void pushNewState(int newLocationPlayer1, int newLocationPlayer2) {
         System.out.println("Client values: " + newLocationPlayer1 + " - " + newLocationPlayer2);
-//        gameScreenController.setNewState(newLocationPlayer1, newLocationPlayer2);
         gameScreenController.animatePlayerToTile(newLocationPlayer1, newLocationPlayer2);
     }
 
@@ -154,14 +153,60 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     }
 
     @Override
-    public Tile rollDice(IClient client, int currentLocation) throws RemoteException {
+    public void rollDice(IClient client, int currentLocation) throws RemoteException {
 
         gameServer.rollDice(this, currentLocation);
-        return null;
+        return;
     }
 
     @Override
     public boolean isHost() {
         return isHost;
+    }
+
+    @Override
+    public boolean checkIfServerIsRunning() throws RemoteException {
+        connectToServer(SharedData.ip,1099);
+        return gameServer != null;
+    }
+
+    @Override
+    public boolean checkIfGameIsFull() throws RemoteException {
+        return gameServer.checkIfGameIsFull();
+    }
+
+    @Override
+    public void leaveGame(boolean inLobby) {
+
+        try {
+            gameServer.leaveGame(this, inLobby);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void pushTerminateGame() throws RemoteException {
+        if(gameScreenController == null){
+            lobbyController.returnToMainMenu();
+        }
+        else{
+            gameScreenController.returnToMainMenu();
+        }
+    }
+
+    @Override
+    public void requestTerminateGame() throws RemoteException {
+        gameServer.terminateGame();
+    }
+
+    @Override
+    public void requestStartGame() throws RemoteException {
+        gameServer.startGame();
+    }
+
+    @Override
+    public void pushStartGame() throws RemoteException {
+        lobbyController.startGame();
     }
 }

@@ -17,5 +17,6 @@
       <Button layoutX="510.0" layoutY="49.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" text="Uitloggen" />
       <Label layoutX="388.0" layoutY="22.0" text="Gebruikersnaam:" />
       <Label fx:id="lblUsername" layoutX="510.0" layoutY="22.0" text="USERNAME" />
+      <Label fx:id="lblError" layoutX="43.0" layoutY="142.0" textFill="#9a1a1a" />
    </children>
 </AnchorPane>

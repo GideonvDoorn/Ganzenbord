@@ -14,6 +14,8 @@ public interface IGame extends Remote {
     void startTurn() throws RemoteException;
     int rollDice(IClient client, int currentTile) throws RemoteException;
     void registerUser(IClient client) throws RemoteException;
+    void unRegisterUser(IClient client) throws RemoteException;
     int getRoomCode()throws RemoteException;
+    boolean checkIfGameIsFull() throws RemoteException;
 
 }

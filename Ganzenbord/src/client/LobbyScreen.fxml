@@ -15,7 +15,7 @@
       </Label>
       <VBox layoutX="189.0" layoutY="178.0" prefHeight="91.0" prefWidth="222.0" style="-fx-border-width: 1; -fx-border-color: #000000;">
          <children>
-            <Label fx:id="lblPlayer1"  text="PLAYER1">
+            <Label fx:id="lblPlayer1" text="PLAYER1">
                <font>
                   <Font size="24.0" />
                </font>
@@ -31,7 +31,7 @@
       <Button layoutX="501.0" layoutY="49.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" text="Uitloggen" />
       <Label fx:id="lblUsername" layoutX="505.0" layoutY="20.0" text="USERNAME" />
       <Label layoutX="392.0" layoutY="20.0" text="Gebruikersnaam" />
-      <Button layoutX="247.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnStartGameOnclick" text="Spel starten" />
+      <Button layoutX="262.0" layoutY="298.0" mnemonicParsing="false" onAction="#btnStartGameOnclick" text="Spel starten" />
       <Button layoutX="24.0" layoutY="351.0" mnemonicParsing="false" onAction="#btnBackOnClick" text="Terug naar hoofdmenu" />
       <Label layoutX="247.0" layoutY="93.0" text="ID:">
          <font>
@@ -43,5 +43,6 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Label fx:id="lblError" layoutX="195.0" layoutY="273.0" prefHeight="17.0" prefWidth="212.0" textFill="#9a1a1a" />
    </children>
 </AnchorPane>

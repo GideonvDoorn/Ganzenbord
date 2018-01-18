@@ -50,10 +50,8 @@
                   <Pane fx:id="pnl81" layoutX="409.0" layoutY="112.0" prefHeight="62.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
                   <Pane fx:id="pnl91" layoutX="441.0" layoutY="112.0" prefHeight="62.0" prefWidth="32.0" style="-fx-border-width: 1; -fx-border-color: #000000;" />
                </children></Pane>
-            <Button fx:id="btnRollDie" layoutX="352.0" layoutY="331.0" mnemonicParsing="false" onAction="#btnRollDieOnClick" prefHeight="60.0" prefWidth="111.0" text="Gooi dobbelsteen" />
+            <Button fx:id="btnRollDie" layoutX="465.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnRollDieOnClick" prefHeight="60.0" prefWidth="111.0" text="Gooi dobbelsteen" />
             <Button fx:id="btnQuit" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnQuitOnClick" prefHeight="25.0" prefWidth="79.0" text="Quit game" />
-            <Button layoutX="237.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnConnect" prefHeight="60.0" prefWidth="111.0" text="Connect" />
-            <Button fx:id="btnRollDie1" layoutX="465.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnMove" prefHeight="60.0" prefWidth="111.0" text="Move" />
          </children>
       </AnchorPane>
    </children>

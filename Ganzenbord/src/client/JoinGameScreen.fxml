@@ -16,9 +16,10 @@
       <Button layoutX="520.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" text="Uitloggen" />
       <Label layoutX="398.0" layoutY="32.0" text="Gebruikersnaam:" />
       <Label fx:id="lblUsername" layoutX="520.0" layoutY="32.0" text="USERNAME" />
-      <Label layoutX="52.0" layoutY="136.0" text="Game ID" />
-      <TextField fx:id="tfGameCode" layoutX="52.0" layoutY="160.0" />
-      <Button layoutX="57.0" layoutY="215.0" mnemonicParsing="false" onAction="#btnJoinGameOnClick" prefHeight="25.0" prefWidth="139.0" text="Spel joinen" />
-      <Label fx:id="lblError" layoutX="52.0" layoutY="192.0" prefHeight="17.0" prefWidth="275.0" textFill="#861111" />
+      <Label layoutX="212.0" layoutY="148.0" text="Game ID" />
+      <TextField fx:id="tfGameCode" layoutX="212.0" layoutY="172.0" />
+      <Button layoutX="217.0" layoutY="227.0" mnemonicParsing="false" onAction="#btnJoinGameOnClick" prefHeight="25.0" prefWidth="139.0" text="Spel joinen" />
+      <Label fx:id="lblError" layoutX="212.0" layoutY="204.0" prefHeight="17.0" prefWidth="275.0" textFill="#861111" />
+      <Button layoutX="32.0" layoutY="352.0" mnemonicParsing="false" onAction="#btnBackOnClick" text="Terug naar hoofdmenu" />
    </children>
 </AnchorPane>
