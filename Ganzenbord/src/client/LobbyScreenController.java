@@ -17,6 +17,7 @@ public class LobbyScreenController implements Serializable {
     public transient Label lblGameID;
     public transient Label lblPlayer1;
     public transient Label lblPlayer2;
+    public transient Label lblError;
 
     @FXML
     public void initialize() {
@@ -28,13 +29,17 @@ public class LobbyScreenController implements Serializable {
     }
 
 
-    public void createGame(){
+    public boolean createGame(){
 
 
         try {
 
             //connect to server and host a game
             client = new GanzenbordClient(true);
+
+            if(!client.checkIfServerIsRunning()){
+                return false;
+            }
 
             client.connectToServer(SharedData.ip, 1099);
             client.setLobbyController(this);
@@ -43,9 +48,11 @@ public class LobbyScreenController implements Serializable {
             //set username in lobbyscreen
             lblPlayer1.setText(UITools.loggedInUser.getUsername());
 
-//            clientID = activeGame.registerUser(client);
+
+            return true;
         } catch (RemoteException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -60,23 +67,51 @@ public class LobbyScreenController implements Serializable {
         catch (RemoteException ex){
            ex.printStackTrace();
         }
-
     }
 
     public void btnBackOnClick(){
+        leaveLobbyScreen();
+
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("MainMenuScreen.fxml");
     }
 
     public void btnLogoutOnClick(){
-        //TODO: -Database, loginserver- logout user
+        leaveLobbyScreen();
+
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("LoginScreen.fxml");
     }
 
+    public void leaveLobbyScreen(){
+        try {
+            if(!client.isHost()){
+                client.leaveGame(true);
+            }
+            else{
+                client.requestTerminateGame();
+            }
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     public void btnStartGameOnclick(){
-        UITools.UIManager uiManager = new UITools.UIManager();
-        uiManager.loadMainGameScreen(client);
+
+        try{
+            if(!client.checkIfGameIsFull()){
+                lblError.setText("Not enough players to start game!");
+                return;
+            }
+            else{
+                client.requestStartGame();
+            }
+        }
+        catch(RemoteException ex){
+            ex.printStackTrace();
+        }
+
     }
 
     public void setUsernames(String host, String guest){
@@ -87,5 +122,17 @@ public class LobbyScreenController implements Serializable {
         if(!guest.equals("")){
             Platform.runLater(() -> lblPlayer2.setText(guest));
         }
+    }
+
+    public void returnToMainMenu() {
+
+        UITools.UIManager uiManager = new UITools.UIManager();
+        Platform.runLater(() -> uiManager.loadFXML("MainMenuScreen.fxml"));
+    }
+
+    public void startGame() {
+
+        UITools.UIManager uiManager = new UITools.UIManager();
+        Platform.runLater(() -> uiManager.loadMainGameScreen(client));
     }
 }

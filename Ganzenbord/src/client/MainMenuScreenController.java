@@ -7,7 +7,7 @@ public class MainMenuScreenController {
 
     @FXML
     public Label lblUsername;
-
+    public Label lblError;
 
     @FXML
     public void initialize() {
@@ -23,7 +23,9 @@ public class MainMenuScreenController {
 
     public void btnStartGameOnClick(){
         UITools.UIManager uiManager = new UITools.UIManager();
-        uiManager.loadLobbyScreenAsHost();
+        if(!uiManager.loadLobbyScreenAsHost()){
+            lblError.setText("Server error, please try again later!");
+        }
     }
 
     public void btnJoinGameOnClick(){

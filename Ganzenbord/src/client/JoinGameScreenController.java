@@ -20,6 +20,15 @@ public class JoinGameScreenController {
     @FXML
     public void initialize() {
         lblUsername.setText(UITools.loggedInUser.getUsername());
+
+        try{
+            client = new GanzenbordClient(false);
+            client.connectToServer(SharedData.ip, 1099);
+
+        }
+        catch (RemoteException ex){
+            ex.printStackTrace();
+        }
     }
 
 
@@ -35,9 +44,16 @@ public class JoinGameScreenController {
 
         //connect to server and join a game
         try{
-            client = new GanzenbordClient(false);
-            client.connectToServer(SharedData.ip, 1099);
-            client.joinGame(Integer.parseInt(tfGameCode.getText()));
+            if(!client.checkIfServerIsRunning()){
+                lblError.setText("Server error, try again later!");
+                return;
+            }
+
+
+            if(!client.joinGame(Integer.parseInt(tfGameCode.getText()))){
+                lblError.setText("Room does not exist!");
+                return;
+            }
         }
         catch (RemoteException ex){
             ex.printStackTrace();
@@ -51,8 +67,12 @@ public class JoinGameScreenController {
 
     }
 
+    public void btnBackOnClick(){
+        UITools.UIManager uiManager = new UITools.UIManager();
+        uiManager.loadFXML("MainMenuScreen.fxml");
+    }
+
     public void btnLogoutOnClick(){
-        //TODO: -Database, loginserver- logout user
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("LoginScreen.fxml");
     }

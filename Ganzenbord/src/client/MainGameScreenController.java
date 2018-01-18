@@ -1,5 +1,6 @@
 package client;
 
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import server.Tile;
@@ -139,22 +140,17 @@ public class MainGameScreenController implements Serializable{
 
 
     public void btnQuitOnClick(){
-        //TODO: -Database, loginserver- logout user
+        try {
+            client.requestTerminateGame();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("MainMenuScreen.fxml");
     }
 
-    public void setNewState(int newLocationPlayer1, int newLocationPlayer2) {
-//
-//        if(newLocationPlayer1 != -1){
-//            this.player.setCurrentLoc(newLocationPlayer1);
-//
-//        }
-//        if(newLocationPlayer2 != -1){
-//            this.player2.setCurrentLoc(newLocationPlayer2);
-//        }
-
-
-        System.out.println("STATE PUSHED");
+    public void returnToMainMenu() {
+        UITools.UIManager uiManager = new UITools.UIManager();
+        Platform.runLater(() -> uiManager.loadFXML("MainMenuScreen.fxml"));
     }
 }

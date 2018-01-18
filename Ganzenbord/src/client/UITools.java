@@ -59,7 +59,7 @@ public class UITools {
         }
 
 
-        public void loadLobbyScreenAsHost(){
+        public boolean loadLobbyScreenAsHost(){
             loader = new FXMLLoader(getClass().getResource("LobbyScreen.fxml"));
             Pane root  = null;
             try{
@@ -72,7 +72,9 @@ public class UITools {
 
             Scene scene = new Scene(root);
             LobbyScreenController controller = loader.<LobbyScreenController>getController();
-            controller.createGame();
+            if(!controller.createGame()){
+                return false;
+            }
             if(stage == null){
                 stage = new Stage();
                 stage.setTitle("");
@@ -81,6 +83,7 @@ public class UITools {
                 stage.setResizable(false);
             }
             stage.setScene(scene);
+            return true;
         }
 
         public void loadLobbyScreenAsClient(IClient client){
