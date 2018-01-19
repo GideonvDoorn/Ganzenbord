@@ -2,65 +2,48 @@ package client;
 
 import login.ILoginManager;
 import shared.IGame;
+import utils.GameLogger;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
 
-public class LoginClient {
-    // Set binding name for Effectenbeurs
-    private static final String bindingName = "login";
+class LoginClient {
+    // Set binding name for loginServer
+    private static final String BINDING_NAME = "LOGIN";
 
-    // References to registry and Effectenbeurs
-    private Registry registry = null;
-    public ILoginManager loginManager = null;
+    ILoginManager loginManager = null;
 
     // Constructor
-    public LoginClient(String ipAddress, int portNumber) {
+    LoginClient(String ipAddress, int portNumber) {
 
-        // Print SharedData address and port number for registry
-        System.out.println("Client: SharedData Address: " + ipAddress);
-        System.out.println("Client: Port number " + portNumber);
+
 
         // Locate registry at SharedData address and port number
+        Registry registry;
         try {
             registry = LocateRegistry.getRegistry(ipAddress, portNumber);
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot locate registry");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
             registry = null;
         }
 
-        // Print result locating registry
-        if (registry != null) {
-            System.out.println("Client: Registry located");
-        } else {
-            System.out.println("Client: Cannot locate registry");
-            System.out.println("Client: Registry is null pointer");
-        }
-
-
-        // Bind Effectenbeurs using registry
+        // Bind loginServer using registry
         if (registry != null) {
             try {
-                loginManager = (ILoginManager) registry.lookup(bindingName);
-            } catch (RemoteException ex) {
-                System.out.println("Client: Cannot bind loginManager");
-                System.out.println("Client: RemoteException: " + ex.getMessage());
-                loginManager = null;
-            } catch (NotBoundException ex) {
-                System.out.println("Client: Cannot bind loginManager");
-                System.out.println("Client: NotBoundException: " + ex.getMessage());
+                loginManager = (ILoginManager) registry.lookup(BINDING_NAME);
+            } catch (RemoteException | NotBoundException ex) {
+
                 loginManager = null;
             }
         }
 
-        // Print result binding Effectenbeurs
+        // Print result binding loginServer
         if (loginManager != null) {
-            System.out.println("Client: loginManager bound");
+            GameLogger.logMessage("Client: loginManager bound", Level.INFO);
         } else {
-            System.out.println("Client: loginManager is null pointer");
+            GameLogger.logMessage("Client: loginManager is null", Level.SEVERE);
         }
     }
 }

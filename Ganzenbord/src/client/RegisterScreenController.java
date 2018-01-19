@@ -5,15 +5,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import login.ILoginManager;
-import login.LoginManager;
 import login.User;
+import utils.GameLogger;
 import utils.SharedData;
 
 import java.rmi.RemoteException;
+import java.util.logging.Level;
 
 public class RegisterScreenController {
-
-    ILoginManager loginServer = new LoginManager();
 
     @FXML
     public Button btnRegister;
@@ -29,7 +28,7 @@ public class RegisterScreenController {
 
     public void btnRegisterOnClick(){
 
-        LoginClient loginClient = new LoginClient(SharedData.ip, 1100);
+        LoginClient loginClient = new LoginClient(SharedData.IP_ADRESS, 1100);
         ILoginManager loginManager = loginClient.loginManager;
 
         if(loginManager == null){
@@ -52,8 +51,6 @@ public class RegisterScreenController {
         }
 
 
-        //TODO: -Database, loginserver- Create user
-
         try{
             if(loginManager.registerUser(new User(tfUsername.getText(), tfPassword.getText()))){
                 lblRegisterError.setText("Succesfully created a user!");
@@ -63,7 +60,7 @@ public class RegisterScreenController {
             }
         }
         catch(RemoteException ex){
-
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
 
 

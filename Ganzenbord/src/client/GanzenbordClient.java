@@ -1,6 +1,7 @@
 package client;
 
 import server.IGameServer;
+import utils.GameLogger;
 import utils.SharedData;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
 
 public class GanzenbordClient extends UnicastRemoteObject implements IClient, Serializable {
 
@@ -17,9 +19,7 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     // Set binding name for server
     private static final String BINDING_NAME = "server";
 
-    // References to registry and server
-    private Registry registry = null;
-    private IGameServer gameServer = null;
+    private transient IGameServer gameServer = null;
 
 
     private boolean isHost;
@@ -27,7 +27,7 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     private MainGameScreenController gameScreenController;
 
     // Constructor
-    public GanzenbordClient(boolean isHost) throws RemoteException {
+    GanzenbordClient(boolean isHost) throws RemoteException{
         this.isHost = isHost;
     }
 
@@ -38,25 +38,21 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
         if(gameServer != null){
             return;
         }
-        // Print SharedData address and port number for registry
-        System.out.println("Client: SharedData Address: " + ipAddress);
-        System.out.println("Client: Port number " + portNumber);
 
         // Locate registry at SharedData address and port number
+        Registry registry;
         try {
             registry = LocateRegistry.getRegistry(ipAddress, portNumber);
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot locate registry");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
+            GameLogger.logMessage("Client: Cannot locate registry" + ex.getMessage() , Level.SEVERE);
             registry = null;
         }
 
         // Print result locating registry
         if (registry != null) {
-            System.out.println("Client: Registry located");
+            GameLogger.logMessage("Client: Registry located" , Level.INFO);
         } else {
-            System.out.println("Client: Cannot locate registry");
-            System.out.println("Client: Registry is null pointer");
+            GameLogger.logMessage("Client: Cannot locate registry" , Level.SEVERE);
         }
 
 
@@ -64,22 +60,17 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
         if (registry != null) {
             try {
                 gameServer = (IGameServer) registry.lookup(BINDING_NAME);
-            } catch (RemoteException ex) {
-                System.out.println("Client: Cannot bind game");
-                System.out.println("Client: RemoteException: " + ex.getMessage());
-                gameServer = null;
-            } catch (NotBoundException ex) {
-                System.out.println("Client: Cannot bind game");
-                System.out.println("Client: NotBoundException: " + ex.getMessage());
+            } catch (RemoteException | NotBoundException ex) {
+                GameLogger.logMessage("Client: Cannot bind game" + ex.getMessage(), Level.SEVERE);
                 gameServer = null;
             }
         }
 
-        // Print result binding Effectenbeurs
+        // Print result binding server
         if (gameServer != null) {
-            System.out.println("Client: game bound");
+            GameLogger.logMessage("Client: game bound", Level.INFO);
         } else {
-            System.out.println("Client: game is null pointer");
+            GameLogger.logMessage("Client: game is null pointer", Level.SEVERE);
         }
     }
 
@@ -108,7 +99,7 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
             return gameServer.hostGame(this);
         }
         catch(RemoteException ex){
-            ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
             return -1;
         }
     }
@@ -123,7 +114,7 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
             return gameServer.joinGame(roomCode, this);
         }
         catch(RemoteException ex){
-            ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
             return false;
         }
 
@@ -131,7 +122,6 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
     @Override
     public void pushNewState(int newLocationPlayer1, int newLocationPlayer2) {
-        System.out.println("Client values: " + newLocationPlayer1 + " - " + newLocationPlayer2);
         gameScreenController.animatePlayerToTile(newLocationPlayer1, newLocationPlayer2);
     }
 
@@ -156,7 +146,6 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     public void rollDice(IClient client, int currentLocation) throws RemoteException {
 
         gameServer.rollDice(this, currentLocation);
-        return;
     }
 
     @Override
@@ -166,7 +155,7 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
     @Override
     public boolean checkIfServerIsRunning() throws RemoteException {
-        connectToServer(SharedData.ip,1099);
+        connectToServer(SharedData.IP_ADRESS,1099);
         return gameServer != null;
     }
 
@@ -180,8 +169,8 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
         try {
             gameServer.leaveGame(this, inLobby);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        } catch (RemoteException ex) {
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
     }
 
@@ -208,5 +197,15 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     @Override
     public void pushStartGame() throws RemoteException {
         lobbyController.startGame();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

@@ -10,13 +10,11 @@ public class User implements Serializable {
         return username;
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
     private String password;
-
-
 
     public User(String username, String password) {
         this.username = username;

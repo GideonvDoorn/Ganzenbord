@@ -1,77 +1,61 @@
 package login;
 
-import server.ServerMain;
+import utils.GameLogger;
 import utils.SharedData;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
 
 public class LoginServer {
 
     // Set port number
-    private static final int portNumber = 1100;
+    private static final int PORT_NUMBER = 1100;
 
-    // Set binding name for Effectenbeurs
-    private static final String bindingName = "login";
+    // Set binding name for loginServer
+    private static final String BINDING_NAME = "LOGIN";
 
-    // References to registry and Effectenbeurs
-    private Registry registry = null;
-    private ILoginManager loginManager = null;
-
-    public LoginServer(){
+    private LoginServer() throws RemoteException{
         // Print port number for registry
-        System.out.println("Server: Port number " + portNumber);
-
-        //create a loginmanager
-        try {
-            loginManager = new LoginManager();
-
-            System.out.println("Server: loginManager created");
-        } catch (RemoteException ex) {
-            System.out.println("Server: Cannot create Game");
-            System.out.println("Server: RemoteException: " + ex.getMessage());
-            loginManager = null;
-        }
+        GameLogger.logMessage("Server: Port number " + PORT_NUMBER, Level.INFO);
 
         // Create registry at port number
+        Registry registry;
         try {
-            registry = LocateRegistry.createRegistry(portNumber);
-            System.out.println("Server: Registry created on SharedData address :" + registry.toString());
-            System.out.println("Server: Registry created on port number : " + portNumber);
+            registry = LocateRegistry.createRegistry(PORT_NUMBER);
         } catch (RemoteException ex) {
-            System.out.println("Server: Cannot create registry");
-            System.out.println("Server: RemoteException: " + ex.getMessage());
+            GameLogger.logMessage("Server: Cannot create registry" + ex.getMessage(), Level.SEVERE);
             registry = null;
         }
 
         // Bind game using registry
         try {
-            registry.rebind(bindingName, loginManager);
+            if (registry != null) {
+                ILoginManager loginManager = new LoginManager();
+                registry.rebind(BINDING_NAME, loginManager);
+            }
         } catch (RemoteException ex) {
-            System.out.println("Server: Cannot bind loginManager");
-            System.out.println("Server: RemoteException: " + ex.getMessage());
+            GameLogger.logMessage("Server: Cannot bind server" + ex.getMessage(), Level.SEVERE);
         }
     }
 
+
+
+
     public static void main(String[] args){
-        final String ipAddress = SharedData.ip;
-
-        // Welcome message
-        System.out.println("SERVER USING REGISTRY");
-
-        System.out.println("[before] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
+        final String ipAddress = SharedData.IP_ADRESS;
 
         // RMI on distinct SharedData address
         System.setProperty("java.rmi.server.hostname", ipAddress );
 
-        System.out.println("[after] java.rmi.server.hostname=" + System.getProperty("java.rmi.server.hostname"));
-
-
-        // Print SharedData addresses and network interfaces
-        ServerMain.printIPAddresses();
-
         // Create server
-        new LoginServer();
+        try{
+            new LoginServer();
+
+        }
+        catch(RemoteException ex){
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
+        }
     }
 }

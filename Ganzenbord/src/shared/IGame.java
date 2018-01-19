@@ -10,8 +10,6 @@ public interface IGame extends Remote {
 
     IClient getHost() throws RemoteException;
     IClient getGuest() throws RemoteException;
-    boolean allPlayersMoved() throws RemoteException;
-    void startTurn() throws RemoteException;
     int rollDice(IClient client, int currentTile) throws RemoteException;
     void registerUser(IClient client) throws RemoteException;
     void unRegisterUser(IClient client) throws RemoteException;

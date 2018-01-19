@@ -1,11 +1,7 @@
 package client;
 
-import server.Tile;
-import shared.IGame;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
 public interface IClient extends Remote {
 

@@ -3,15 +3,16 @@ package client;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import shared.IGame;
+import utils.GameLogger;
 import utils.SharedData;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
 
 public class LobbyScreenController implements Serializable {
 
-    private IClient client;
+    private transient IClient client;
     @FXML
     public transient Label lblUsername;
     public transient Label lblGameID;
@@ -29,7 +30,7 @@ public class LobbyScreenController implements Serializable {
     }
 
 
-    public boolean createGame(){
+    boolean createGame(){
 
 
         try {
@@ -41,7 +42,7 @@ public class LobbyScreenController implements Serializable {
                 return false;
             }
 
-            client.connectToServer(SharedData.ip, 1099);
+            client.connectToServer(SharedData.IP_ADRESS, 1099);
             client.setLobbyController(this);
             lblGameID.setText(String.valueOf(client.hostGame()));
 
@@ -51,12 +52,12 @@ public class LobbyScreenController implements Serializable {
 
             return true;
         } catch (RemoteException ex) {
-            ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
             return false;
         }
     }
 
-    public void joinLobby(IClient client){
+    void joinLobby(IClient client){
         this.client = client;
 
 
@@ -65,7 +66,7 @@ public class LobbyScreenController implements Serializable {
             client.requestUsernamePush();
         }
         catch (RemoteException ex){
-           ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
     }
 
@@ -83,7 +84,7 @@ public class LobbyScreenController implements Serializable {
         uiManager.loadFXML("LoginScreen.fxml");
     }
 
-    public void leaveLobbyScreen(){
+    private void leaveLobbyScreen(){
         try {
             if(!client.isHost()){
                 client.leaveGame(true);
@@ -92,7 +93,7 @@ public class LobbyScreenController implements Serializable {
                 client.requestTerminateGame();
             }
         } catch (RemoteException ex) {
-            ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
     }
 
@@ -102,19 +103,18 @@ public class LobbyScreenController implements Serializable {
         try{
             if(!client.checkIfGameIsFull()){
                 lblError.setText("Not enough players to start game!");
-                return;
             }
             else{
                 client.requestStartGame();
             }
         }
         catch(RemoteException ex){
-            ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
 
     }
 
-    public void setUsernames(String host, String guest){
+    void setUsernames(String host, String guest){
 
         if(!host.equals("")){
             Platform.runLater(() -> lblPlayer1.setText(host));
@@ -124,13 +124,13 @@ public class LobbyScreenController implements Serializable {
         }
     }
 
-    public void returnToMainMenu() {
+    void returnToMainMenu() {
 
         UITools.UIManager uiManager = new UITools.UIManager();
         Platform.runLater(() -> uiManager.loadFXML("MainMenuScreen.fxml"));
     }
 
-    public void startGame() {
+    void startGame() {
 
         UITools.UIManager uiManager = new UITools.UIManager();
         Platform.runLater(() -> uiManager.loadMainGameScreen(client));

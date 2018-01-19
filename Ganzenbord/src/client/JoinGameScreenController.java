@@ -3,9 +3,11 @@ package client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import utils.GameLogger;
 import utils.SharedData;
 
 import java.rmi.RemoteException;
+import java.util.logging.Level;
 
 public class JoinGameScreenController {
 
@@ -23,11 +25,11 @@ public class JoinGameScreenController {
 
         try{
             client = new GanzenbordClient(false);
-            client.connectToServer(SharedData.ip, 1099);
+            client.connectToServer(SharedData.IP_ADRESS, 1099);
 
         }
         catch (RemoteException ex){
-            ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
     }
 
@@ -56,7 +58,7 @@ public class JoinGameScreenController {
             }
         }
         catch (RemoteException ex){
-            ex.printStackTrace();
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
             return;
         }
 

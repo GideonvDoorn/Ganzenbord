@@ -1,19 +1,17 @@
 package login;
 
+import utils.GameLogger;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
-import java.util.Properties;
+import java.util.logging.Level;
 
 public class LoginManager extends UnicastRemoteObject implements ILoginManager {
 
+    private transient Connection myConn = null;
 
-    private Properties props;
-    private PreparedStatement InsertStatement = null;
-    private Statement myStmt = null;
-    Connection myConn = null;
-
-    public LoginManager() throws RemoteException {
+    LoginManager() throws RemoteException {
     }
 
     @Override
@@ -41,16 +39,14 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
 
         try {
 
-
-
             // Create a statement
-            InsertStatement = myConn.prepareStatement("INSERT INTO user (username, password) VALUES(?,?);");
+            PreparedStatement insertStatement = myConn.prepareStatement("INSERT INTO user (username, password) VALUES(?,?);");
 
 
-            InsertStatement.setString (1, userToAdd.getUsername());
-            InsertStatement.setString   (2, userToAdd.getPassword());
+            insertStatement.setString (1, userToAdd.getUsername());
+            insertStatement.setString   (2, userToAdd.getPassword());
 
-            InsertStatement.execute();
+            insertStatement.execute();
 
 
             myConn.close();
@@ -58,8 +54,8 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
 
             return true;
         }
-        catch (Exception exc) {
-            exc.printStackTrace();
+        catch (Exception ex) {
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
             return false;
 
         }
@@ -76,15 +72,14 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
 
             // Get a connection to database
             myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ganzenbord?useSSL=false", "student" , "student");
-
-            System.out.println("Database connection successful!\n");
+            GameLogger.logMessage("Database connection successful!\n", Level.INFO);
 
 
 
 
         }
-        catch (Exception exc) {
-            exc.printStackTrace();
+        catch (Exception ex) {
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
     }
 
@@ -92,21 +87,20 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
     private User getUserFromdb(String name){
 
         initConnection();
-        ResultSet myRs = null;
+        ResultSet myRs;
 
         try {
 
             // Create a statement
-            myStmt = myConn.createStatement();
+            Statement myStmt = myConn.createStatement();
 
             // Execute SQL query
             myRs = myStmt.executeQuery("select * from user where username = '" + name + "'");
 
             // Process the result set
-            User u = null;
+            User u;
 
             if(myRs.next()) {
-                int id = myRs.getInt("id");
                 String username = myRs.getString("username");
                 String password = myRs.getString("password");
                 u = new User(username, password);
@@ -122,10 +116,20 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
             // return the result
             return u;
         }
-        catch (Exception exc) {
-            exc.printStackTrace();
+        catch (Exception ex) {
+            GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
         }
 
         return null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

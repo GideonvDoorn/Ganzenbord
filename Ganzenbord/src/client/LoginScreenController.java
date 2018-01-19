@@ -21,17 +21,12 @@ public class LoginScreenController {
     public Label lblLoginError;
 
     public LoginScreenController() throws RemoteException {
-    }
-
-
-    @FXML
-    public void Initialize(){
 
     }
 
     public void btnLoginOnClick(){
 
-        LoginClient loginClient = new LoginClient(SharedData.ip, 1100);
+        LoginClient loginClient = new LoginClient(SharedData.IP_ADRESS, 1100);
         ILoginManager loginManager = loginClient.loginManager;
 
         if(loginManager == null){
@@ -45,7 +40,6 @@ public class LoginScreenController {
             return;
         }
 
-        //TODO: -Database, loginserver- check if login matches an user
 
         User u = null;
         try{
@@ -63,7 +57,6 @@ public class LoginScreenController {
         else{
             //Switch to MainMenuPanel
             UITools.loggedInUser = u;
-
             UITools.UIManager uiManager = new UITools.UIManager();
             uiManager.loadFXML("MainMenuScreen.fxml");
 

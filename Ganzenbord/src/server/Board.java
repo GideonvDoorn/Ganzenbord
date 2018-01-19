@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Board {
 
-    List<Tile> tiles;
+    private List<Tile> tiles;
 
     public Board(){
         tiles = new ArrayList<>();

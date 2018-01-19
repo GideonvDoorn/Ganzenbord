@@ -1,6 +1,8 @@
 package utils;
 
 public class SharedData {
-    public static String ip = "192.168.2.25";
+
+    private SharedData(){}
+    public static final String IP_ADRESS = "192.168.2.25";
 
 }
