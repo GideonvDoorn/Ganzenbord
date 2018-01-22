@@ -15,15 +15,18 @@ import java.util.logging.Level;
 public class RegisterScreenController {
 
     @FXML
-    public Button btnRegister;
-    public Button btnCancel;
-    public TextField tfUsername;
-    public TextField tfPassword;
-    public TextField tfRepeatPassword;
-    public Label lblRegisterError;
+    Button btnRegister;
+    @FXML
+    Button btnCancel;
+    @FXML
+    TextField tfUsername;
+    @FXML
+    TextField tfPassword;
+    @FXML
+    TextField tfRepeatPassword;
+    @FXML
+    Label lblRegisterError;
 
-    public RegisterScreenController() throws RemoteException {
-    }
 
 
     public void btnRegisterOnClick(){

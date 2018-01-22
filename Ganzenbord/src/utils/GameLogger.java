@@ -18,10 +18,4 @@ public class GameLogger {
         LOGGER.log(logLevel, message);
 
     }
-
-    public static void setLoggerLevel( Level logLevel){
-
-        LOGGER.setLevel(logLevel);
-
-    }
 }

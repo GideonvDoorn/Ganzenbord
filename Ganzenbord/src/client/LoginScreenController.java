@@ -12,13 +12,16 @@ import java.rmi.RemoteException;
 
 public class LoginScreenController {
 
-
     @FXML
-    public Button btnLogin;
-    public Button btnRegister;
-    public TextField tfUsername;
-    public TextField tfPassword;
-    public Label lblLoginError;
+    Button btnLogin;
+    @FXML
+    Button btnRegister;
+    @FXML
+    TextField tfUsername;
+    @FXML
+    TextField tfPassword;
+    @FXML
+    Label lblLoginError;
 
     public LoginScreenController() throws RemoteException {
 
@@ -64,9 +67,6 @@ public class LoginScreenController {
     }
 
     public void btnRegisterOnClick(){
-
-
-
         //Switch to MainMenuPanel
         UITools.UIManager uiManager = new UITools.UIManager();
         uiManager.loadFXML("RegisterScreen.fxml");

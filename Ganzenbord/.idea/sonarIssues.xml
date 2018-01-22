@@ -248,6 +248,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/login/LoginServerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/login/User.java">
           <value>
             <set />
@@ -313,7 +318,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/tests/LoginServerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/tests/PlayerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/tests/RMITest.java">
           <value>
             <set />
           </value>

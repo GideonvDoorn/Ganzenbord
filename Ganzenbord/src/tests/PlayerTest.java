@@ -1,12 +1,11 @@
 package tests;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import server.Tile;
-import server.TileType;
 import shared.Player;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerTest {
 
@@ -15,7 +14,6 @@ class PlayerTest {
     @BeforeEach
     void player(){
         testPlayer = new Player("testName");
-
     }
 
     @Test
@@ -24,27 +22,13 @@ class PlayerTest {
     }
 
     @Test
-    void hasMoved() {
-
-        assertEquals(false, testPlayer.hasMoved());
+    void getCurrentLoc(){
+        Assertions.assertEquals(0, testPlayer.getCurrentLoc());
     }
-
     @Test
-    void setMoved() {
-        testPlayer.setMoved(true);
-        assertEquals(true, testPlayer.hasMoved());
-    }
-
-    @Test
-    void getCurrentTile() {
-        assertEquals(null, testPlayer.getCurrentTile());
-    }
-
-    @Test
-    void moveToTile() {
-        Tile testTile = new Tile(1, TileType.DEFAULT);
-        testPlayer.moveToTile(testTile);
-        assertEquals(testTile, testPlayer.getCurrentTile());
+    void setCurrentLoc(){
+        testPlayer.setCurrentLoc(1);
+        Assertions.assertEquals(1, testPlayer.getCurrentLoc());
     }
 
 }

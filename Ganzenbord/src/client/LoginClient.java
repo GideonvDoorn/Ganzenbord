@@ -1,7 +1,6 @@
 package client;
 
 import login.ILoginManager;
-import shared.IGame;
 import utils.GameLogger;
 
 import java.rmi.NotBoundException;
@@ -10,14 +9,18 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Level;
 
-class LoginClient {
+public class LoginClient {
     // Set binding name for loginServer
     private static final String BINDING_NAME = "LOGIN";
+
+    public ILoginManager getLoginManager() {
+        return loginManager;
+    }
 
     ILoginManager loginManager = null;
 
     // Constructor
-    LoginClient(String ipAddress, int portNumber) {
+    public LoginClient(String ipAddress, int portNumber) {
 
 
 

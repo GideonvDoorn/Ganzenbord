@@ -24,12 +24,13 @@ public class Game extends UnicastRemoteObject implements IGame  {
         return host != null && guest != null;
     }
 
-    public void registerUser(IClient client){
+    public boolean registerUser(IClient client){
         if(guest != null){
-            return;
+            return false;
         }
 
         guest = client;
+        return true;
     }
 
     @Override

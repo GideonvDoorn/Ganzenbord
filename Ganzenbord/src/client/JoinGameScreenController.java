@@ -14,9 +14,11 @@ public class JoinGameScreenController {
     IClient client;
 
     @FXML
-    public Label lblUsername;
-    public Label lblError;
-    public TextField tfGameCode;
+    Label lblUsername;
+    @FXML
+    Label lblError;
+    @FXML
+    TextField tfGameCode;
 
 
     @FXML

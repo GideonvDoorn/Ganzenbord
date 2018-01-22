@@ -24,8 +24,7 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
     private transient IGame activeGame = null;
 
 
-
-    private ServerMain() throws RemoteException{
+    public ServerMain() throws RemoteException{
         // Print port number for registry
         GameLogger.logMessage("Server: Port number " + PORT_NUMBER, Level.INFO);
 
@@ -90,17 +89,9 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
     @Override
     public boolean joinGame(int roomCode, IClient client) {
 
-        try{
-            if(activeGame == null || activeGame.getHost() == null){
-                return false;
-            }
+        try {
+            return activeGame != null && activeGame.getHost() != null && activeGame.getRoomCode() == roomCode && activeGame.registerUser(client);
 
-            if(activeGame.getRoomCode() == roomCode){
-
-                activeGame.registerUser(client);
-                return true;
-            }
-            return false;
         }
         catch (RemoteException ex){
             GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
@@ -111,12 +102,13 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
 
     @Override
     public void pushLobbyUsernames() {
-        //push usernames to show in lobby
+
         if(activeGame == null){
             return;
         }
 
         try{
+            //SERVER SERVER PUSH: push usernames to show in lobby
             if(activeGame.getGuest() == null){
                 activeGame.getHost().setUsernames(activeGame.getHost().getUsername(), " ");
             }
@@ -130,16 +122,6 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     @Override
     public void rollDice(IClient client, int currentLocation) throws RemoteException {
         int newLocation = activeGame.rollDice(client, currentLocation);
@@ -148,7 +130,7 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
             return;
         }
 
-        //RMI PUSH: push state to all clients, locations that don't have to change are -1
+        //RMI SERVER PUSH: push state to all clients, locations that don't have to change are -1
         if(client.isHost()){
             activeGame.getHost().pushNewState(newLocation, -1);
             activeGame.getGuest().pushNewState(newLocation, -1);
@@ -185,6 +167,7 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
 
     @Override
     public void terminateGame() throws RemoteException {
+        //RMI SERVER PUSH: pushes to all clients that game will be terminated
         activeGame.getHost().pushTerminateGame();
         if(activeGame.getGuest() != null){
             activeGame.getGuest().pushTerminateGame();
@@ -193,6 +176,7 @@ public class ServerMain extends UnicastRemoteObject implements IGameServer, Seri
 
     @Override
     public void startGame() throws RemoteException {
+        //RMI SERVER PUSH: pushes to all clients that game will be start
         activeGame.getHost().pushStartGame();
         activeGame.getGuest().pushStartGame();
     }

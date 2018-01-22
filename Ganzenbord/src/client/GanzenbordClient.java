@@ -27,7 +27,7 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
     private MainGameScreenController gameScreenController;
 
     // Constructor
-    GanzenbordClient(boolean isHost) throws RemoteException{
+    public GanzenbordClient(boolean isHost) throws RemoteException{
         this.isHost = isHost;
     }
 
@@ -122,13 +122,17 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
     @Override
     public void pushNewState(int newLocationPlayer1, int newLocationPlayer2) {
-        gameScreenController.animatePlayerToTile(newLocationPlayer1, newLocationPlayer2);
+        if(gameScreenController != null){
+            gameScreenController.animatePlayerToTile(newLocationPlayer1, newLocationPlayer2);
+        }
     }
 
 
     @Override
     public void setUsernames(String host, String guest) {
-        lobbyController.setUsernames(host, guest);
+        if(lobbyController != null){
+            lobbyController.setUsernames(host, guest);
+        }
     }
 
 
@@ -176,6 +180,10 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
     @Override
     public void pushTerminateGame() throws RemoteException {
+        if(gameScreenController == null && lobbyController == null){
+            return;
+        }
+
         if(gameScreenController == null){
             lobbyController.returnToMainMenu();
         }
@@ -196,7 +204,9 @@ public class GanzenbordClient extends UnicastRemoteObject implements IClient, Se
 
     @Override
     public void pushStartGame() throws RemoteException {
-        lobbyController.startGame();
+        if(lobbyController != null){
+            lobbyController.startGame();
+        }
     }
 
     @Override

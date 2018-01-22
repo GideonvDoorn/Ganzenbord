@@ -14,11 +14,16 @@ public class LobbyScreenController implements Serializable {
 
     private transient IClient client;
     @FXML
-    public transient Label lblUsername;
-    public transient Label lblGameID;
-    public transient Label lblPlayer1;
-    public transient Label lblPlayer2;
-    public transient Label lblError;
+    transient Label lblUsername;
+    @FXML
+    transient Label lblGameID;
+    @FXML
+    transient Label lblPlayer1;
+    @FXML
+    transient Label lblPlayer2;
+    @FXML
+    transient Label lblError;
+
 
     @FXML
     public void initialize() {

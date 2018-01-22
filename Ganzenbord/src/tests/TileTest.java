@@ -1,7 +1,7 @@
 package tests;
 
-import server.Tile;
-import server.TileType;
+import shared.Tile;
+import shared.TileType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;

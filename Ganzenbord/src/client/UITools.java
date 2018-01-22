@@ -16,7 +16,7 @@ public class UITools {
 
     }
 
-    static User loggedInUser;
+    public static User loggedInUser;
     public static class UIManager {
 
 
@@ -48,12 +48,6 @@ public class UITools {
             MainGameScreenController controller = loader.getController();
             controller.setClient(client);
 
-            stage(stage, scene);
-            stage.setScene(scene);
-        }
-
-
-        private void stage(Stage stage, Scene scene){
             if(stage == null){
                 stage = new Stage();
                 stage.setTitle("");
@@ -61,9 +55,12 @@ public class UITools {
                 stage.show();
                 stage.setResizable(false);
             }
+            stage.setScene(scene);
         }
 
+
         boolean loadLobbyScreenAsHost(){
+
             loader = new FXMLLoader(getClass().getResource("LobbyScreen.fxml"));
             Pane root  = null;
             try{
@@ -72,7 +69,6 @@ public class UITools {
             catch (IOException e) {
                 GameLogger.logMessage(e.getMessage(), Level.SEVERE);
             }
-
             Scene scene = null;
             if (root != null) {
                 scene = new Scene(root);
@@ -81,7 +77,15 @@ public class UITools {
             if(!controller.createGame()){
                 return false;
             }
-            stage(stage, scene);
+            if(stage == null){
+                stage = new Stage();
+                stage.setTitle("");
+                stage.setScene(scene);
+                stage.show();
+                stage.setResizable(false);
+            }
+            stage.setScene(scene);
+
             return true;
         }
 
@@ -100,7 +104,13 @@ public class UITools {
             if (root != null) {
                 scene = new Scene(root);
             }
-            stage(stage, scene);
+            if(stage == null){
+                stage = new Stage();
+                stage.setTitle("");
+                stage.setScene(scene);
+                stage.show();
+                stage.setResizable(false);
+            }
             stage.setScene(scene);
         }
 
@@ -126,7 +136,13 @@ public class UITools {
             if (root != null) {
                 scene = new Scene(root);
             }
-            stage(stage, scene);
+            if(stage == null){
+                stage = new Stage();
+                stage.setTitle("");
+                stage.setScene(scene);
+                stage.show();
+                stage.setResizable(false);
+            }
             stage.setScene(scene);
         }
 

@@ -16,17 +16,20 @@ public class MainGameScreenController implements Serializable{
 
     private static final int NORMAL_STEP = 32;
 
-    private IClient client;
+    private transient IClient client;
     private Player player;
     private Player player2;
     private double player1Startpos;
     private double player2Startpos;
 
     @FXML
-    public transient Button btnRollDie;
-    public transient Label lblUsername;
-    public transient Circle circlePlayer1;
-    public transient Circle circlePlayer2;
+    transient Button btnRollDie;
+    @FXML
+    transient Label lblUsername;
+    @FXML
+    transient Circle circlePlayer1;
+    @FXML
+    transient Circle circlePlayer2;
 
 
 
@@ -92,13 +95,7 @@ public class MainGameScreenController implements Serializable{
     }
 
     void setGameEnd(int playerWhoWonID){
-//        if(playerWhoWonID == clientID){
-//            GameLogger.logMessage("Player won!", Level.INFO);
-//        }
-//        else{
-//            GameLogger.logMessage("Player lost", Level.INFO);
-//
-//        }
+        throw new UnsupportedOperationException();
     }
 
 

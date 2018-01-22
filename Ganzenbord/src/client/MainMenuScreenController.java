@@ -6,8 +6,9 @@ import javafx.scene.control.Label;
 public class MainMenuScreenController {
 
     @FXML
-    public Label lblUsername;
-    public Label lblError;
+    Label lblUsername;
+    @FXML
+    Label lblError;
 
     @FXML
     public void initialize() {

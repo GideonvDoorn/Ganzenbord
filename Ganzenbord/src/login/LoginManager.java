@@ -39,20 +39,19 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
 
         try {
 
-            // Create a statement
-            PreparedStatement insertStatement = myConn.prepareStatement("INSERT INTO user (username, password) VALUES(?,?);");
+            try (PreparedStatement insertStatement = myConn.prepareStatement("INSERT INTO user (username, password) VALUES(?,?);")) {
+
+                insertStatement.setString(1, userToAdd.getUsername());
+                insertStatement.setString(2, userToAdd.getPassword());
+
+                insertStatement.execute();
 
 
-            insertStatement.setString (1, userToAdd.getUsername());
-            insertStatement.setString   (2, userToAdd.getPassword());
-
-            insertStatement.execute();
+                myConn.close();
 
 
-            myConn.close();
-
-
-            return true;
+                return true;
+            }
         }
         catch (Exception ex) {
             GameLogger.logMessage(ex.getMessage(), Level.SEVERE);
@@ -87,31 +86,29 @@ public class LoginManager extends UnicastRemoteObject implements ILoginManager {
     private User getUserFromdb(String name){
 
         initConnection();
-        ResultSet myRs;
 
         try {
 
             // Create a statement
-            Statement myStmt = myConn.createStatement();
-
-            // Execute SQL query
-            myRs = myStmt.executeQuery("select * from user where username = '" + name + "'");
-
-            // Process the result set
             User u;
+            try (PreparedStatement myStmt = myConn.prepareStatement("select * from user where username = ?;")) {
 
-            if(myRs.next()) {
-                String username = myRs.getString("username");
-                String password = myRs.getString("password");
-                u = new User(username, password);
+                myStmt.setString(1, name);
+
+                try(ResultSet myRs = myStmt.executeQuery()) {
+
+                    if (myRs.next()) {
+                        String username = myRs.getString("username");
+                        String password = myRs.getString("password");
+                        u = new User(username, password);
+
+                    } else {
+                        return null;
+                    }
+
+                }
 
             }
-            else{
-                return null;
-            }
-
-            myConn.close();
-
 
             // return the result
             return u;

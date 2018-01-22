@@ -16,7 +16,7 @@ public class LoginServer {
     // Set binding name for loginServer
     private static final String BINDING_NAME = "LOGIN";
 
-    private LoginServer() throws RemoteException{
+    public LoginServer() throws RemoteException{
         // Print port number for registry
         GameLogger.logMessage("Server: Port number " + PORT_NUMBER, Level.INFO);
 

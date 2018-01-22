@@ -2,9 +2,9 @@ package tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import server.Board;
-import server.Tile;
-import server.TileType;
+import shared.Board;
+import shared.Tile;
+import shared.TileType;
 
 
 import static org.junit.jupiter.api.Assertions.*;
